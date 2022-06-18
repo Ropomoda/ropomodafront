@@ -1,3 +1,5 @@
+@import './fonts/_iranyekan.css';
+
 html,
 body {
   padding: 0;
@@ -13,4 +15,5 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family:  iranyekan ,sans-serif,"Roboto";
 }
