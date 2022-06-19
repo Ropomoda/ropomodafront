@@ -1,0 +1,10 @@
+
+@import "./variables";
+.ant-menu-horizontal {
+  border-bottom: none !important;
+  transition: none !important;
+}
+
+sup.ant-badge-count{
+  background-color: $primary;
+}
