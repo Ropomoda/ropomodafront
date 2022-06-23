@@ -34,7 +34,7 @@ function Home() {
                             <i className="fal fa-user ml-2"></i>
                             ورود یا ثبت‌نام
                         </Button>
-                        <Badge count={'۱'} offset={[35, 30]} >
+                        <Badge size="small" count={'۱'} offset={[35, 30]} >
                             <Link href="/basket">
                                 <Tooltip title="سبد خرید" >
                                     <Button className="mr-2" type="link" size="large">

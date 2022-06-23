@@ -28,7 +28,7 @@ export default function Home() {
                     </Breadcrumb.Item>
                 </Breadcrumb>
             </Row>
-            <Row className='pt-5'>
+            <Row className='pt-5' gutter={20}>
                 <Col span={6} className="search-side-box">
                     <Card>
                         <div className='flex flex-row justify-between mb-1'>
@@ -78,10 +78,12 @@ export default function Home() {
                     </div>
                 </Col>
                 <Col span={18}>
-                    <div className='flex flex-row flex-wrap justify-end'>
+                    <Card>
+                        <div className='flex flex-row flex-wrap justify-end'>
 
-                        {[...Array(60)].map((v, i) => <ProductItem wrapperClassName="mb-2" key={i} />)}
-                    </div>
+                            {[...Array(60)].map((v, i) => <ProductItem wrapperClassName="mb-2" key={i} />)}
+                        </div>
+                    </Card>
                 </Col>
             </Row>
         </ShopLayout>

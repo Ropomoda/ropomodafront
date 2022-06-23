@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import stickybits from "stickybits";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 function Home() {
     useEffect(() => {
         stickybits('#skmlrgjnbh');
@@ -16,7 +17,9 @@ function Home() {
                     <Menu mode="horizontal" >
                         <Menu.SubMenu key="SubMenu" title="دسته بندی ها" icon={<i className="fal fa-bars" />}>
                             <Menu.Item key="blooz">
-                                بلوز و شومیز
+                                <Link href="/search">
+                                    بلوز و شومیز
+                                </Link>
                             </Menu.Item>
                             <Menu.Item key="taap">
                                 تاپ و تیشرت
