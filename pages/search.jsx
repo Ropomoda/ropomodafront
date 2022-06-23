@@ -1,7 +1,7 @@
 import { Card, Row, Col, Breadcrumb, Collapse, Button, Switch, Divider } from 'antd';
 import Link from 'next/link';
-import ShopLayout from '../Components/layout/shopLayout';
-import ProductItem from '../Components/productItem';
+import ShopLayout from '../components/layout/shopLayout';
+import ProductItem from '../components/productItem';
 const { Panel } = Collapse;
 
 

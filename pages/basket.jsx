@@ -1,4 +1,4 @@
-import ShopLayout from '../Components/layout/shopLayout';
+import ShopLayout from '../components/layout/shopLayout';
 
 
 function Home() {

@@ -1,4 +1,4 @@
-import ShopLayout from '../Components/layout/shopLayout';
+import ShopLayout from '../components/layout/shopLayout';
 import { Card, Row, Col, Breadcrumb, Collapse, Button, Switch, Divider } from 'antd';
 import Link from 'next/link';
 import { useEffect } from 'react';

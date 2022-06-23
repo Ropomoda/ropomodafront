@@ -15,7 +15,7 @@ function Home() {
                 <div className="container mx-auto flex flex-row justify-between mt-3 mb-2">
                     <div className="flex flex-row items-center w-1/3">
                         <Link href="/">
-                            <Image className="cursor-pointer" src="/ropomoda.svg" width={250} height={100} alt="ropomoda" />
+                            <Image className="cursor-pointer" src="/RopoModa.svg" width={250} height={100} alt="ropomoda" />
                         </Link>
                         <Input
                             placeholder="دنبال چ میگردی؟"
