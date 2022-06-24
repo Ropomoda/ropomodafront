@@ -7,11 +7,10 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 function Home() {
     useEffect(() => {
-        stickybits('#skmlrgjnbh');
     }, []);
 
     return (
-        <div id="skmlrgjnbh" className="bg-white z-20">
+        <div id="navbar-wrapper" className="bg-white z-20">
             <navbar>
                 <div className="container mt-5 mx-auto">
                     <Menu mode="horizontal" >

@@ -11,9 +11,9 @@ const Home = ({ wrapperClassName = "" }) => {
                 <Card className='h-full cursor-pointer'>
                     <div className={`flex flex-col ${styles["product-item-wrapper"]} h-full`}>
                         <ImageLoader
-                            src={`https://picsum.photos/150/150/?${Math.random()}`}
-                            loading='lazy'
-                            className={`${styles["product-image"]}`}
+                            src={`/images/loading-image.gif`}
+                            className={`${styles["product-image"]} lazyload`}
+                            data-src={`https://picsum.photos/150/150/?${Math.random()}`}
                         />
                         <h2 className='mt-3'>نام محصول</h2>
                         <div className='w-full text-left'>
