@@ -8,10 +8,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "engines": {
-    "node": "14.17.0",
-    "yarn": "1.22.18"
-  },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
