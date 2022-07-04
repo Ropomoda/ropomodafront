@@ -15,7 +15,6 @@ WORKDIR /nextl
 ENV NODE_ENV production
 COPY --from=builder /nextl/next.config.js ./
 COPY --from=builder /nextl/antd.custom.js ./
-COPY --from=builder /nextl/next-i18next.config.js ./
 COPY --from=builder /nextl/public ./public
 COPY --from=builder /nextl/.next ./.next
 COPY --from=builder /nextl/node_modules ./node_modules
