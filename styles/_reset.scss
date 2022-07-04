@@ -34,4 +34,17 @@ button.ant-switch[aria-checked=false]{
   }
 }
 
+.react-multiple-carousel__arrow{
+  background: #f9afeb !important;
+  &:hover{
+    background: #f9afebd7 !important;
+  }
+}
 
+.rtl.react-multiple-carousel__arrow--right{
+  left: calc(1% + 1px) !important;
+}
+
+.rtl.react-multiple-carousel__arrow--left{
+  right: calc(1% + 1px) !important;
+}
