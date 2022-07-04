@@ -8,3 +8,30 @@
 sup.ant-badge-count{
   background-color: $primary;
 }
+
+button.ant-btn.ant-btn-primary{
+  border: none;
+  box-shadow: inset 7px 7px 10px #ffecfb;
+  
+  &:hover ,&:focus{
+    box-shadow: inset 6px 6px 10px $primary;
+  }
+  &:active{
+    box-shadow: inset 6px 6px 10px #F9E0F4;
+  }
+}
+
+button.ant-switch.ant-switch-checked{
+  box-shadow: inset 5px 5px 10px #fff2fd;
+  &:hover ,&:focus,&:active{
+    box-shadow: inset 5px 5px 10px #fff2fd;
+  }
+}
+button.ant-switch[aria-checked=false]{
+  box-shadow: inset 5px 5px 10px #808080;
+  &:hover ,&:focus,&:active{
+    box-shadow: inset 5px 5px 10px #808080;
+  }
+}
+
+
