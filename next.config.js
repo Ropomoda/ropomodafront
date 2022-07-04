@@ -5,6 +5,10 @@ const modifyVars = require('./antd.custom.js');
 console.log(`🏗️ Building Ropo Front`);
 
 module.exports = withAntdLess({
+  images: {
+    loader: 'akamai',
+    path: '',
+  },
   // optional
   modifyVars: modifyVars,
   // optional
