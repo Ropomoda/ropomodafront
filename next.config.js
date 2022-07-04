@@ -2,6 +2,8 @@
 const withAntdLess = require('next-plugin-antd-less');
 const modifyVars = require('./antd.custom.js');
 
+console.log(`🏗️ Building Ropo Front`);
+
 module.exports = withAntdLess({
   // optional
   modifyVars: modifyVars,
