@@ -23,19 +23,19 @@ const Home = ({
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 5,
-      paritialVisibilityGutter: 50
+      items: 4,
+      paritialVisibilityGutter: 0
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 5,
-      paritialVisibilityGutter: 30
+      items: 1.8,
+      paritialVisibilityGutter: 0
     }
   };
   return (
-    <div className={`container mx-auto ${containerClassName}`}>
+    <div className={`lg:container mx-auto ${containerClassName}`}>
 
-      <Card className={`${styles[`carousel-wrapper--${type}`]}`}>
+      <Card className={`carousel-wrapper ${styles[`carousel-wrapper--${type}`]}`}>
         <Carousel
           ssr
           partialVisible

@@ -1,7 +1,10 @@
-import { Card, Row, Col, Breadcrumb, Collapse, Button, Switch, Divider } from 'antd';
+import { Card, Row, Col, Breadcrumb, Collapse, Button, Switch, } from 'antd';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { connect } from "react-redux";
 import ShopLayout from '../components/layout/shopLayout';
 import ProductItem from '../components/productItem';
+import { getSampleData } from '../store/actions/sampleAction';
 const { Panel } = Collapse;
 
 
@@ -11,9 +14,11 @@ const text = `
 
 
 
-export default function Home() {
+function Home({ getSampleData }) {
 
-
+    useEffect(() => {
+        getSampleData();
+    }, []);
 
 
     return (
@@ -28,7 +33,7 @@ export default function Home() {
                     </Breadcrumb.Item>
                 </Breadcrumb>
             </Row>
-            <Row className='pt-5'>
+            <Row className='pt-5' gutter={20}>
                 <Col span={6} className="search-side-box">
                     <Card>
                         <div className='flex flex-row justify-between mb-1'>
@@ -70,20 +75,29 @@ export default function Home() {
                                 <h5 className='text-xl mb-5'>جدیدترین ها</h5>
                                 {[...Array(3)].map((v, i) => <ProductItem wrapperClassName="mb-2" key={i} />)}
 
-                                <Button size='large' type='primary'>
-                                    حذف فیلترها
+                                <Button className='mt-3' size='large' type='primary'>
+                                    مشاهده همه
                                 </Button>
                             </div>
                         </Card>
                     </div>
                 </Col>
                 <Col span={18}>
-                    <div className='flex flex-row flex-wrap justify-end'>
+                    <Card>
+                        <div className='flex flex-row flex-wrap justify-end'>
 
-                        {[...Array(60)].map((v, i) => <ProductItem wrapperClassName="mb-2" key={i} />)}
-                    </div>
+                            {[...Array(60)].map((v, i) => <ProductItem wrapperClassName="mb-2" key={i} />)}
+                        </div>
+                    </Card>
                 </Col>
             </Row>
         </ShopLayout>
     )
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getSampleData: () => dispatch(getSampleData),
+    }
+}
+export default connect(undefined, mapDispatchToProps)(Home)

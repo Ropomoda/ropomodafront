@@ -1,13 +1,15 @@
 @import "../../styles/variables";
+
+.carousel-wrapper{
+    border-radius: 25px;
+}
 .carousel-wrapper--special{
     background-color: $primary !important;
     box-shadow: inset 6px 6px 20px #F9E0F4;
-    border-radius: 25px;
 }
 .carousel-wrapper--light{
     background-color: white!important;
     box-shadow: inset 6px 6px 20px #F9E0F4;
-    border-radius: 25px;
 }
 
 .show-more-items{
