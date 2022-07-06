@@ -2,10 +2,12 @@
 @import './reset';
 @import './fontawesome/css/all.css';
 @import './variables';
+@import './theme/antd.mobile.theme';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 html,
 body {

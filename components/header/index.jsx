@@ -29,7 +29,7 @@ function Home() {
             <div id="header-wrapper" className="bg-white z-20">
                 <header>
                     <div className="container mx-auto flex flex-row items-center justify-between pt-3 pb-2">
-                        <div className="flex flex-row items-center w-1/3">
+                        <div className="flex flex-row items-center sm:w-1/3 w-full">
                             <Link href="/">
                                 <Image className="cursor-pointer" src="/RopoModa.svg" width={250} height={100} alt="ropomoda" />
                             </Link>
@@ -37,7 +37,7 @@ function Home() {
                                 <i className="fal fa-search" />
                             } size="large" placeholder="دنبال چ میگردی؟" />
                         </div>
-                        <div>
+                        <div className="hidden sm:block">
                             <Button className="mr-2" onClick={() => { loginModalClickHandler(true) }} size="large" type="primary">
                                 <i className="fal fa-user ml-2"></i>
                                 ورود یا ثبت‌نام

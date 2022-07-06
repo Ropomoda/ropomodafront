@@ -1,10 +1,12 @@
 // next.config.js
 const withAntdLess = require('next-plugin-antd-less');
 const modifyVars = require('./antd.custom.js');
-
+const withTM = require('next-transpile-modules')([
+  'antd-mobile',
+]);
 console.log(`🏗️ Building Ropo Front`);
 
-module.exports = withAntdLess({
+module.exports = withTM(withAntdLess({
   images: {
     loader: 'akamai',
     path: '',
@@ -28,4 +30,4 @@ module.exports = withAntdLess({
   future: {
     webpack5: true,
   },
-});
+}));

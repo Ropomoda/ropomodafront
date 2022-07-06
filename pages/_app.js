@@ -1,4 +1,5 @@
 import 'antd/dist/antd.css';
+import "antd-mobile/bundle/style.css";
 import '../styles/globals.scss';
 import 'normalize.css';
 import { ConfigProvider } from 'antd';

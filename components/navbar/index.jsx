@@ -10,7 +10,7 @@ function Home() {
     }, []);
 
     return (
-        <div id="navbar-wrapper" className="bg-white z-20">
+        <div id="navbar-wrapper" className="bg-white z-20 hidden sm:block">
             <navbar>
                 <div className="container mt-5 mx-auto">
                     <Menu mode="horizontal" >

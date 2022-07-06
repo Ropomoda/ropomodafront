@@ -1,5 +1,6 @@
 
 @import "./variables";
+
 .ant-menu-horizontal {
   border-bottom: none !important;
   transition: none !important;
@@ -48,4 +49,8 @@ button.ant-switch[aria-checked=false]{
 
 .rtl.react-multiple-carousel__arrow--left{
   right: calc(1% + 1px) !important;
+}
+
+.react-multiple-carousel__arrow{
+  z-index: 15 !important;
 }

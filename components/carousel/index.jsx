@@ -7,11 +7,11 @@ import "react-multi-carousel/lib/styles.css";
 import ProductItem from '../productItem';
 
 
-const Home = ({ 
-  containerClassName, 
-  type = "light", 
-  items=[],
-  showMoreItems = true ,
+const Home = ({
+  containerClassName,
+  type = "light",
+  items = [],
+  showMoreItems = true,
   title
 }) => {
 
@@ -43,8 +43,8 @@ const Home = ({
           responsive={responsive}
           rtl
         >
-          <CarouselHead title={title}/>
-          {items.map((item,index)=>{
+          <CarouselHead title={title} />
+          {items.map((item, index) => {
             return <ProductItem key={index} type={type} />
           })}
           {showMoreItems ? <ShowMoreItems /> : null}
