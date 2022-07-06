@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }) {
 
   return <>
     <Head>
+      <title>فروشگاه اینترنتی روپومدا</title>
       {/* Seo Meta Tags */}
       <meta name="title" content="فروشگاه اینترنتی روپومدا" />
       <meta name="description" content="توضیحات" />
