@@ -36,6 +36,9 @@ function MyApp({ Component, pageProps }) {
       <meta property="og:description" content="فروشگاه اینترنتی روپومدا" />
       <meta property="og:type" content="business.business" />
       <meta property="og:image" content="https://ropomoda-public-staticfiles.s3.ir-thr-at1.arvanstorage.com/public/logo-fill.png" />
+
+      <link rel="manifest" href="/manifest.json"/>
+
     </Head>
     <Provider store={store}>
       <ConfigProvider direction="rtl">
