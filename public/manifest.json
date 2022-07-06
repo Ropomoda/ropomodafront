@@ -2,20 +2,26 @@
     "name": "Ropo Moda",
     "short_name": "Ropo Moda",
     "description": "فروشگاه اینترنتی روپومدا",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FFF5FD",
+    "theme_color": "#F9AFEC",
+    "orientation": "portrait-primary",
     "icons": [
         {
-            "src": "icons/icon-32.png",
+            "src": "/favicon.png",
+            "type": "image/png",
+            "sizes": "72x72"
+        },
+        {
+            "src": "/icons/icon-32.png",
             "sizes": "32x32",
             "type": "image/png"
         },
         {
-            "src": "icons/icon-512.png",
+            "src": "/icons/icon-512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
-    ],
-    "start_url": "/",
-    "display": "fullscreen",
-    "theme_color": "#F9AFEC",
-    "background_color": "#FFF5FD"
+    ]
 }
