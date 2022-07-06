@@ -15,6 +15,7 @@ button.ant-btn.ant-btn-primary{
   
   &:hover ,&:focus{
     box-shadow: inset 6px 6px 10px $primary;
+    color: rgb(66, 66, 66);
   }
   &:active{
     box-shadow: inset 6px 6px 10px #F9E0F4;
