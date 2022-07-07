@@ -34,7 +34,7 @@ function Home({ getSampleData }) {
                 </Breadcrumb>
             </Row>
             <Row className='pt-5' gutter={20}>
-                <Col span={6} className="search-side-box">
+                <Col span={0} sm={6} className="search-side-box">
                     <Card>
                         <div className='flex flex-row justify-between mb-1'>
 
@@ -82,10 +82,9 @@ function Home({ getSampleData }) {
                         </Card>
                     </div>
                 </Col>
-                <Col span={18}>
+                <Col span={24} sm={18}>
                     <Card>
                         <div className='flex flex-row flex-wrap justify-end'>
-
                             {[...Array(60)].map((v, i) => <ProductItem wrapperClassName="mb-2" key={i} />)}
                         </div>
                     </Card>

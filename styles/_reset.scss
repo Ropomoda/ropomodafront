@@ -37,18 +37,25 @@ button.ant-switch[aria-checked=false]{
 }
 
 .react-multiple-carousel__arrow{
-  background: #f9afeb !important;
+  border: solid 1px rgb(208, 208, 208) !important;
+  background: #ffffff !important;
   &:hover{
-    background: #f9afebd7 !important;
+    background: rgb(208, 208, 208) !important;
+    &::before{
+      color: #fff !important;
+    }
+  }
+  &::before{
+    color: rgb(208, 208, 208) !important;
   }
 }
 
 .rtl.react-multiple-carousel__arrow--right{
-  left: calc(1% + 1px) !important;
+  left: calc(1% + 4px) !important;
 }
 
 .rtl.react-multiple-carousel__arrow--left{
-  right: calc(1% + 1px) !important;
+  right: calc(1% + 4px) !important;
 }
 
 .react-multiple-carousel__arrow{

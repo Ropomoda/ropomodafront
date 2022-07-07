@@ -43,7 +43,7 @@ const Home = ({
           responsive={responsive}
           rtl
         >
-          <CarouselHead title={title} />
+          <CarouselHead title={title} type={type} />
           {items.map((item, index) => {
             return <ProductItem key={index} type={type} />
           })}
