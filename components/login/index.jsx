@@ -24,7 +24,7 @@ const Home = ({ visible, onOk, onCancel }) => {
         } catch (err) {
             notification.error({
                 message: 'خطا',
-                description: "لطفن شماره موبایل یا ایمیلت رو وارد کن",
+                description: "لطفن شماره موبایل رو وارد کن",
                 placement: "bottomLeft",
                 duration: 5
             });
@@ -54,7 +54,7 @@ const Home = ({ visible, onOk, onCancel }) => {
                         <p key="1" className='mb-10'>
                             درود!
                             <br />
-                            شماره موبایل یا ایمیل را وارد کن تا ک کنی ورود
+                            شماره موبایل را وارد کن تا ک کنی ورود
                         </p>
                         <div key="2">
                             <ConfigProvider direction='ltr' >
@@ -66,9 +66,9 @@ const Home = ({ visible, onOk, onCancel }) => {
                                             message: "میشه اینو خالی نذاری؟"
                                         }
                                     ]}
-                                    name="esagfv"
+                                    name="mobile"
                                 >
-                                    <Input size='large' placeholder='ایمیل یا شماره موبایل' />
+                                    <Input size='large' placeholder='شماره موبایل' />
                                 </Form.Item>
                             </ConfigProvider>
                         </div>
