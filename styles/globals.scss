@@ -58,3 +58,10 @@ body {
 ::-webkit-scrollbar-corner {
   background-color: transparent;
 }
+
+.ltr {
+  direction: ltr !important;
+}
+.rtl {
+  direction: rtl !important;
+}

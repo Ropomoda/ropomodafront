@@ -10,7 +10,7 @@ function Home() {
   
     
     return (
-        <Row gutter={20}>
+        <Row gutter={20} >
             <Col lg={18} span={24} className="mb-3">
                 <Card>
                     <div className='flex flex-col justify-center items-center my-5 text-center'>

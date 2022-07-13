@@ -1,3 +1,5 @@
+import * as R from'ramda';
+
 export const persianNumber = (number) => {
   const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
   if (number || number == 0) {
@@ -19,4 +21,19 @@ export const numberWithCommas = (number, decimals = 2) => {
     return num;
   }
   return "";
+};
+
+
+export const getS3Image = (name , bucket = "public-statics") => {
+  switch (bucket) {
+    case "public-statics":
+      return `https://ropomoda-public-staticfiles.s3.ir-thr-at1.arvanstorage.com/${name}`;
+    default:
+      return `https://ropomoda.com/${name}`;
+  }
+}
+
+export const isValueHollow = (value) => {
+  //!DON'T CHECK FALSE VALUES
+  return R.isEmpty(value) || R.isNil(value);
 };

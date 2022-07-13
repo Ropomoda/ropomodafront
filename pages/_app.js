@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { store, wrapper } from '../store/store';
 import Head from 'next/head';
+import { getS3Image } from '../utils/utils';
 
 function MyApp({ Component, pageProps }) {
 
@@ -36,7 +37,7 @@ function MyApp({ Component, pageProps }) {
       <meta property="og:url" content="ropomoda.com" />
       <meta property="og:description" content="فروشگاه اینترنتی روپومدا" />
       <meta property="og:type" content="business.business" />
-      <meta property="og:image" content="https://ropomoda-public-staticfiles.s3.ir-thr-at1.arvanstorage.com/public/logo-fill.png" />
+      <meta property="og:image" content={getS3Image("logo-fill.png")} />
 
       <link rel="manifest" href="/manifest.json"/>
 

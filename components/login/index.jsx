@@ -1,30 +1,40 @@
-import { Button, ConfigProvider, Form, Input, Modal, notification } from 'antd'
+import { Button, ConfigProvider, Form, Input, Modal, notification, Statistic } from 'antd'
 import Link from 'next/link';
 import QueueAnim from 'rc-queue-anim';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { getS3Image, isValueHollow, persianNumber } from '../../utils/utils';
+import * as R from 'ramda';
+import Image from 'next/image';
 
 const Home = ({ visible, onOk, onCancel }) => {
     const [loginForm] = Form.useForm();
     const [loading, setLoading] = useState(false);
-    const [timer, setTimer] = useState(59);
     const [page, setPage] = useState(1);
+    const [canReSendSMS, setCanReSendSMS] = useState(false);
+    const [renderPage, setRenderPage] = useState(true);
+    const timeToResend = Date.now() + 2 * 60 * 1000;
 
+    const { Countdown } = Statistic;
+    const sendVerifySMS = () => {
+        setCanReSendSMS(false);
+    }
     const loginHandler = async () => {
         setLoading(true);
         try {
-            await loginForm.validateFields();
+            const fields = await loginForm.validateFields();
             notification.success({
                 message: 'کد تایید',
                 description:
-                    'کد تایید به فیلان ارسال شد',
+                    `کد تایید به ${persianNumber(fields["mobile"])} ارسال شد.`,
                 placement: "bottomLeft",
                 duration: 5
             });
-            setPage(2);
+            setCanReSendSMS(false);
+            changePage(2);
         } catch (err) {
             notification.error({
                 message: 'خطا',
-                description: "لطفن شماره موبایل رو وارد کن",
+                description: "لطفا شماره موبایل خود را وارد کنید.",
                 placement: "bottomLeft",
                 duration: 5
             });
@@ -33,15 +43,23 @@ const Home = ({ visible, onOk, onCancel }) => {
         setLoading(false);
     }
 
+    const changePage = (page, anime = true) => {
+        // anime && setRenderPage(false);
+        setPage(page);
+    }
     return (
         <Modal
             visible={visible}
             onCancel={onCancel}
             closable
+            transitionName=''
             title={
-                <>
-                    ورود | ثبت نام
-                </>
+                <div className='flex flex-row items-center'>
+                    <Image src={getS3Image("ropomoda-logo-r.svg")} width={50} height={50} alt="روپومدا" />
+                    <span className='mr-2' >
+                        ورود | ثبت نام
+                    </span>
+                </div>
             }
             centered
             maskStyle={{ backgroundColor: "#F9AFEC" }}
@@ -49,28 +67,47 @@ const Home = ({ visible, onOk, onCancel }) => {
             footer={null}
         >
             <Form onSubmitCapture={loginHandler} form={loginForm} >
-                <QueueAnim duration={500} type="scale" className='flex flex-col'>
-                    {page === 1 ? <div key="1">
+                <QueueAnim
+                    onAnimationEnd={() => {
+                        setRenderPage(true);
+                    }}
+                    duration={500}
+                    type="scale"
+                    className='flex flex-col'>
+                    <div key="0"></div>
+                    {renderPage && page === 1 ? <div key="1">
                         <p key="1" className='mb-10'>
-                            درود!
+                            سلام دوست عزیز!
                             <br />
-                            شماره موبایل را وارد کن تا ک کنی ورود
+                            برای ورود یا ثبت نام لطفا شماره موبایل خود را وارد کنید.
                         </p>
                         <div key="2">
-                            <ConfigProvider direction='ltr' >
-                                <Form.Item
-                                    key="2"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: "میشه اینو خالی نذاری؟"
+                            <Form.Item
+                                key="2"
+                                rules={[
+                                    {
+                                        validator: (role, value = '', callback) => {
+                                            var phoneRe = /^0\d{10}$/;
+                                            if (value.match(phoneRe)) {
+                                                callback();
+                                            }
+                                            else {
+                                                callback("لطفا شماره موبایل خود را به شکل صحیح وارد کنید. مثال: 09112223344");
+                                            }
                                         }
-                                    ]}
-                                    name="mobile"
-                                >
-                                    <Input size='large' placeholder='شماره موبایل' />
-                                </Form.Item>
-                            </ConfigProvider>
+                                    }
+                                ]}
+                                name="mobile"
+                                validateTrigger={["onBlur"]}
+                            >
+                                <Input
+                                    pattern="[0-9]*"
+                                    inputmode="numeric"
+                                    className='ltr'
+                                    autoFocus
+                                    size='large'
+                                    placeholder='09112223344' />
+                            </Form.Item>
                         </div>
 
                         <div key="3">
@@ -82,92 +119,56 @@ const Home = ({ visible, onOk, onCancel }) => {
                         <p key="4" className='text-xs mt-4 text-center'>
                             ورود شما به منزله پذیرش شرایط RopoModa و قوانین حریم‌خصوصی است
                         </p>
-                    </div> : <div key="2">
+                    </div> : undefined}
+
+                    {renderPage && page === 2 ? <div key="1">
                         <p key="5" className='mb-6'>
                             یه کد برات فرستادیم
                         </p>
-                        <div key="6" className='flex flex-row'>
-
-                            {[...Array(5)].map((value, index) => <div key={index} className="mx-3" >
-                                <Input className='text-center' size='large' placeholder={`${5 - index}`} />
-                            </div>)}
+                        <div key="6" className='flex flex-row mb-3'>
+                            <Input
+                                autoFocus
+                                className='text-center tracking-widest'
+                                size='large'
+                                placeholder={`- - - - -`}
+                            />
 
                         </div>
-                        <a key="7" size='large' type='link' className='mt-2 text-right text-xs'>
-                            {timer === 0 ?
-                                <>ارسال مجدد کد تایید</> :
-                                <> ارسال کد تایید بعد از {timer} ثانیه</>}
-                        </a>
+                        <div key="7" className='mb-3'>
+                            {canReSendSMS ?
+                                <Button onClick={sendVerifySMS} type='link' className='text-right text-xs'>
+                                    ارسال مجدد کد تایید
+                                </Button> :
+                                <div className='flex flex-row text-primary'>
+                                    <span className='ml-1'>ارسال مجدد کد تایید بعد از</span>
+                                    <Countdown
+                                        value={timeToResend}
+                                        format="m:ss"
+                                        onFinish={() => setCanReSendSMS(true)}
+                                        valueRender={(v) => <div
+                                            className='text-primary text-base'>
+                                            {v}
+                                        </div>}
+                                    />
+                                </div>
+                            }
+                        </div>
                         <div key="8">
                             <Button htmlType='submit' size='large' type='primary' className='mt-3 w-full'>
                                 تایید
                             </Button>
                         </div>
                         <div key="9">
-                            <Button onClick={() => { setPage(1) }} size='large' type='link' className='mt-3 w-full'>
+                            <Button
+                                onClick={() => {
+                                    changePage(1, false);
+                                }}
+                                size='large'
+                                type='link' className='mt-3 w-full'>
                                 شماره اشتباهه؟
                             </Button>
                         </div>
-                    </div>}
-                    {/* {page === 1 ? [
-                        <p key="1" className='mb-10'>
-                            درود!
-                            <br />
-                            شماره موبایل یا ایمیل را وارد کن تا ک کنی ورود
-                        </p>,
-                        <div key="2">
-                            <ConfigProvider direction='ltr' >
-                                <Form.Item
-                                    key="2"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: "میشه اینو خالی نذاری؟"
-                                        }
-                                    ]}
-                                    name="esagfv"
-                                >
-                                    <Input size='large' placeholder='ایمیل یا شماره موبایل' />
-                                </Form.Item>
-                            </ConfigProvider>
-                        </div>
-                        ,
-                        <div key="3">
-                            <Button htmlType='submit' size='large' type='primary' className='mt-3 w-full'>
-                                ورود یا ثبت نام
-                            </Button>
-                        </div>,
-
-                        <p key="4" className='text-xs mt-4 text-center'>
-                            ورود شما به منزله پذیرش شرایط RopoModa و قوانین حریم‌خصوصی است
-                        </p>
-                    ] : [
-                        <p key="5" className='mb-6'>
-                            یه کد برات فرستادیم
-                        </p>,
-                        <div key="6" className='flex flex-row'>
-
-                            {[...Array(5)].map((value, index) => <div key={index} className="mx-3" >
-                                <Input className='text-center' size='large' placeholder={`${5 - index}`} />
-                            </div>)}
-
-                        </div>,
-                        <a key="7" size='large' type='link' className='mt-2 text-right text-xs'>
-                            {timer === 0 ?
-                                <>ارسال مجدد کد تایید</> :
-                                <> ارسال کد تایید بعد از {timer} ثانیه</>}
-                        </a>,
-                        <div key="8">
-                            <Button htmlType='submit' size='large' type='primary' className='mt-3 w-full'>
-                                تایید
-                            </Button>
-                        </div>,
-                        <div key="9">
-                            <Button onClick={() => { setPage(1) }} size='large' type='link' className='mt-3 w-full'>
-                                شماره اشتباهه؟
-                            </Button>
-                        </div>,
-                    ]} */}
+                    </div> : undefined}
                 </QueueAnim>
             </Form>
         </Modal>
