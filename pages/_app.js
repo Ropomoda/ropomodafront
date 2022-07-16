@@ -8,10 +8,18 @@ import { Provider } from 'react-redux';
 import { store, wrapper } from '../store/store';
 import Head from 'next/head';
 import { getS3Image } from '../utils/utils';
+import ReactGA from 'react-ga';
 
 function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
+    ReactGA.initialize('G-7GN93PD1BK');
+    ReactGA.pageview(window.location.pathname + window.location.search);
+    const tagManagerArgs = {
+      gtmId: "GTM-TQM643Q",
+    };
+
+    TagManager.initialize(tagManagerArgs);
   }, []);
 
   return <>
@@ -39,7 +47,7 @@ function MyApp({ Component, pageProps }) {
       <meta property="og:type" content="business.business" />
       <meta property="og:image" content={getS3Image("logo-fill.png")} />
 
-      <link rel="manifest" href="/manifest.json"/>
+      <link rel="manifest" href="/manifest.json" />
 
     </Head>
     <Provider store={store}>
