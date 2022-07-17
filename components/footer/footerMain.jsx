@@ -113,7 +113,7 @@ function FooterMain() {
                         حــــس خـــوب
                     </p>
                     <p className="text-black bold my-0 py-0 mt-2">
-                        با یـــــــــــــــــــک
+                        بــــــــــا یـــــــــک
                     </p>
                     <p className="text-black bold my-0 py-0 mt-2">
                         خــــرید خـــوب
