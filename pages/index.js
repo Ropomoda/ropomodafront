@@ -22,7 +22,6 @@ export default function Home() {
         containerClassName="pt-12 pb-4"
         items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
       />
-
     </ShopLayout>
   );
 }

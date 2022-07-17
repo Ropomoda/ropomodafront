@@ -28,16 +28,18 @@ function Home() {
         <>
             <div id="header-wrapper" className="bg-white z-20">
                 <header>
-                    <div className="px-5 flex flex-row items-center justify-between pt-3 pb-2">
+                    <div className="px-2 sm:px-5 flex flex-row items-center justify-between pt-2 sm:pt-3 pb-2">
                         <div className="flex flex-row items-center sm:w-1/3 w-full">
-                            <Link href="/">
-                                <Image
-                                    className="cursor-pointer"
-                                    src="/RopoModa.png"
-                                    width={270}
-                                    height={75}
-                                    alt="ropomoda" />
-                            </Link>
+                            <div className="hidden sm:block">
+                                <Link href="/">
+                                    <Image
+                                        className="cursor-pointer"
+                                        src="/RopoModa.png"
+                                        width={270}
+                                        height={75}
+                                        alt="ropomoda" />
+                                </Link>
+                            </div>
                             <Input
                                 dir="rtl"
                                 enterButton={null}

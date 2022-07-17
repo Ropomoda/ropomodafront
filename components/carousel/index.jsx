@@ -5,6 +5,7 @@ import ShowMoreItems from './showMoreItems';
 import CarouselHead from './carouselHead';
 import "react-multi-carousel/lib/styles.css";
 import ProductItem from '../productItem';
+import WrapperCard from "./wrapperCard";
 
 
 const Home = ({
@@ -33,9 +34,8 @@ const Home = ({
     }
   };
   return (
-    <div className={`lg:container mx-auto ${containerClassName}`}>
-
-      <Card className={`carousel-wrapper ${styles[`carousel-wrapper--${type}`]}`}>
+    <div className={`${containerClassName}`}>
+      <WrapperCard className={`carousel-wrapper ${styles[`carousel-wrapper--${type}`]}`} >
         <Carousel
           ssr
           partialVisible
@@ -49,7 +49,7 @@ const Home = ({
           })}
           {showMoreItems ? <ShowMoreItems /> : null}
         </Carousel>
-      </Card>
+      </WrapperCard>
     </div>
   )
 }

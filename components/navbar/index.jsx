@@ -1,5 +1,5 @@
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons"
-import { Button, ConfigProvider, Input, Menu } from "antd"
+import { Badge, Button, ConfigProvider, Input, Menu } from "antd"
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import stickybits from "stickybits";
@@ -34,7 +34,8 @@ function Home() {
                             پرفروش ترین ها
                         </Menu.Item>
                         <Menu.Item key="trhee" icon={<i className="fal fa-hourglass-end"></i>}>
-                            تک سایز ها
+                                تک سایز ها
+                                
                         </Menu.Item>
                     </Menu>
                 </div>

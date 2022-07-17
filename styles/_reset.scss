@@ -61,3 +61,6 @@ button.ant-switch[aria-checked=false]{
 .react-multiple-carousel__arrow{
   z-index: 15 !important;
 }
+.ant-steps.no-max-width{
+  width: auto !important;
+}
