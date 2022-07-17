@@ -32,8 +32,8 @@ export default function Home() {
                         میرم پروفایلمو ببینم
                     </Button>
                 </Link>
-                <Button className='mx-1'>
-                    سورپرایزم کن!
+                <Button className='mx-1' type='primary'>
+                    سورپرایزم کن! 🎁
                 </Button>
             </div>
 

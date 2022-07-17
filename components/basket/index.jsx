@@ -1,8 +1,9 @@
 import { Button, Card, Col, Empty, Row } from "antd"
 import { numberWithCommas, persianNumber } from '../../utils/utils'
+import Price from "../utils/price";
 
 function Home() {
-    const shippingCost = 28000;
+    const shippingCost = 0;
     const productsTotalCost = 885000;
     const discount = 340000;
     const discountPercent = ((discount / productsTotalCost) * 100).toFixed(0);
@@ -34,22 +35,22 @@ function Home() {
                             <span>
                                 قیمت کالاها ({persianNumber(2)})
                             </span>
-                            <span>
-                                {persianNumber(numberWithCommas(productsTotalCost))}
-                            </span>
+                            <Price>
+                                {productsTotalCost}
+                            </Price>
                         </div>
                         <div className='flex flex-row justify-between mt-3 font-extrabold text-red-500'>
                             <span>
                                 مجموع تخفیف
                                 <i className='fal fa-badge-percent mr-2' />
                             </span>
-                            <div>
+                            <div className="flex flex-row">
                                 <span className='ml-1'>
                                     (٪{persianNumber(discountPercent)})
                                 </span>
-                                <span>
-                                    {persianNumber(numberWithCommas(discount))}
-                                </span>
+                                <Price>
+                                    {discount}
+                                </Price>
                             </div>
                         </div>
                         <div className='flex flex-row justify-between mt-3'>
@@ -58,14 +59,14 @@ function Home() {
                                 <i className='fal fa-truck mr-2' />
                             </span>
                             <span>
-                                {persianNumber(numberWithCommas(shippingCost))}
+                                رایگان!
                             </span>
                         </div>
                         <div className='flex flex-row justify-between mt-16 text-lg font-bold'>
                             <span>قابل پرداخت</span>
-                            <span>
-                                {persianNumber(numberWithCommas(payable))}
-                            </span>
+                            <Price>
+                                {payable}
+                            </Price>
                         </div>
 
                         <Button type='primary' size='large' className='flex flex-row items-center mt-5'>

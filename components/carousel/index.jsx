@@ -13,7 +13,8 @@ const Home = ({
   type = "light",
   items = [],
   showMoreItems = true,
-  title
+  title,
+  colorHex = null
 }) => {
 
   const responsive = {
@@ -45,7 +46,14 @@ const Home = ({
         >
           <CarouselHead title={title} type={type} />
           {items.map((item, index) => {
-            return <ProductItem key={index} type={type} />
+            return <ProductItem key={index} type={type} productInfo={
+              {
+                collectionInfo: {
+                  collectionName: title,
+                  collectionPrimaryColorHex: colorHex
+                }
+              }
+            } />
           })}
           {showMoreItems ? <ShowMoreItems /> : null}
         </Carousel>

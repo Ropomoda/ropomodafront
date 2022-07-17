@@ -8,19 +8,22 @@ export default function Home() {
         title="حراجی!"
         type='special'
         containerClassName="pt-12 pb-4"
-        items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
+        items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]}
+        colorHex="#2dcbb2"
       />
 
       <Carousel
         title="جدید‌ترین محصولات"
         containerClassName="pt-12 pb-4"
-        items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
+        items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]}
+        colorHex="#ffe25b"
       />
 
       <Carousel
         title="تک سایزها"
         containerClassName="pt-12 pb-4"
-        items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
+        items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]}
+        colorHex="#F9AFEC"
       />
     </ShopLayout>
   );
