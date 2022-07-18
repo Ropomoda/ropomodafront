@@ -14,7 +14,8 @@ const Home = ({
   items = [],
   showMoreItems = true,
   title,
-  colorHex = null
+  colorHex = null,
+  badgeText = null
 }) => {
 
   const responsive = {
@@ -49,7 +50,7 @@ const Home = ({
             return <ProductItem key={index} type={type} productInfo={
               {
                 collectionInfo: {
-                  collectionName: title,
+                  collectionName: badgeText || title,
                   collectionPrimaryColorHex: colorHex
                 }
               }

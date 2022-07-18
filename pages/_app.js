@@ -7,6 +7,17 @@ import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { store, wrapper } from '../store/store';
 import ReactGA from 'react-ga';
+import Router from 'next/router';
+import NProgress from 'nprogress'; //nprogress module
+
+
+//Binding events. 
+NProgress.configure({
+  showSpinner:false,
+})
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
 

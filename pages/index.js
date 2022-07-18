@@ -17,6 +17,7 @@ export default function Home() {
         containerClassName="pt-12 pb-4"
         items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]}
         colorHex="#ffe25b"
+        badgeText="جدید"
       />
 
       <Carousel
@@ -24,6 +25,7 @@ export default function Home() {
         containerClassName="pt-12 pb-4"
         items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]}
         colorHex="#F9AFEC"
+        badgeText="تک سایز"
       />
     </ShopLayout>
   );
