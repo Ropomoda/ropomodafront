@@ -1,4 +1,4 @@
-import { GET_SAMPLE, SAMPLE_ERROR } from "../types";
+import { GET_SAMPLE, SAMPLE_ERROR } from "../store/types";
 
 export const getSampleData = () => async (dispatch) => {
   try {

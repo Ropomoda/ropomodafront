@@ -1,4 +1,3 @@
-import { Card, } from "antd"
 import Carousel from "react-multi-carousel";
 import styles from './styles.module.scss';
 import ShowMoreItems from './showMoreItems';
@@ -6,18 +5,19 @@ import CarouselHead from './carouselHead';
 import "react-multi-carousel/lib/styles.css";
 import ProductItem from '../productItem';
 import WrapperCard from "./wrapperCard";
+import { storeReq } from "../../http_requests/storeReq";
+import { useEffect, useState } from "react";
 
 
 const Home = ({
   containerClassName,
   type = "light",
-  items = [],
   showMoreItems = true,
   title,
   colorHex = null,
   badgeText = null
 }) => {
-
+  const [productList, setProductList] = useState([]);
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -35,6 +35,19 @@ const Home = ({
       paritialVisibilityGutter: 0
     }
   };
+  const getCollectionData = async () => {
+    try {
+      const { data } = await storeReq.getAllProducts();
+      const { results = [] } = data;
+      setProductList(results);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  useEffect(() => {
+    getCollectionData();
+  }, []);
+
   return (
     <div className={`${containerClassName}`}>
       <WrapperCard className={`carousel-wrapper ${styles[`carousel-wrapper--${type}`]}`} >
@@ -46,9 +59,10 @@ const Home = ({
           rtl
         >
           <CarouselHead title={title} type={type} />
-          {items.map((item, index) => {
+          {productList.map((item, index) => {
             return <ProductItem key={index} type={type} productInfo={
               {
+                ...item,
                 collectionInfo: {
                   collectionName: badgeText || title,
                   collectionPrimaryColorHex: colorHex

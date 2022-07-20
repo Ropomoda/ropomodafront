@@ -3,6 +3,7 @@ import { makeRequest, baseUrl, visitorConfig } from '../config';
 
 
 
-export const  getAllProducts = ()=>{
-    return makeRequest(axios.get(`${baseUrl}store/products/` , visitorConfig()))
+export const getAllProducts = () => {
+    return makeRequest(() => axios.get(`${baseUrl}store/products/?format=json`, visitorConfig())
+    )
 }

@@ -1,10 +1,10 @@
 import ShopLayout from '../components/layout/shopLayout';
-import Carousel from '../components/carousel';
+import Collection from '../components/collection';
 
 export default function Home() {
   return (
     <ShopLayout>
-      <Carousel
+      <Collection
         title="حراجی!"
         type='special'
         containerClassName="pt-12 pb-4"
@@ -12,7 +12,7 @@ export default function Home() {
         colorHex="#2dcbb2"
       />
 
-      <Carousel
+      <Collection
         title="جدید‌ترین محصولات"
         containerClassName="pt-12 pb-4"
         items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]}
@@ -20,7 +20,7 @@ export default function Home() {
         badgeText="جدید"
       />
 
-      <Carousel
+      <Collection
         title="تک سایزها"
         containerClassName="pt-12 pb-4"
         items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]}

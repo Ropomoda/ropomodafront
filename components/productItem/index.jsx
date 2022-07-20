@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Price from '../utils/price';
 
 const Home = ({ wrapperClassName = "", productInfo = {} }) => {
-    const { collectionInfo = null } = productInfo;
+    const { name, price, count, collectionInfo = null, image = null } = productInfo;
     const { collectionName = null, collectionPrimaryColorHex = null } = collectionInfo || {};
     const wrapRibbonBadge = (child, collectionName, collectionPrimaryColorHex) => {
         return isValueHollow(collectionName) ? child : <Badge.Ribbon placement='start' text={collectionName} color={collectionPrimaryColorHex}>
@@ -22,19 +22,16 @@ const Home = ({ wrapperClassName = "", productInfo = {} }) => {
                         <ImageLoader
                             src={`/images/loading-image.gif`}
                             className={`${styles["product-image"]} lazyload rounded-lg`}
-                            data-src={`https://picsum.photos/200/200/?${Math.random()}`}
+                            data-src={image}
                         />
-                        <h2 className='mt-3'>نام محصول</h2>
+                        <h2 className='mt-3'>{name}</h2>
                         <div className='w-full flex flex- justify-between items-center'>
-                            <span className='ml-1 text-white bg-primary px-2 py-1 rounded-3xl'>
+                            {/* <span className='ml-1 text-white bg-primary px-2 py-1 rounded-3xl'>
                                 ٪{persianNumber(15)}
-                            </span>
+                            </span> */}
                             <div className='flex flex-col'>
-                                <Price type="through">
-                                    200000
-                                </Price>
                                 <Price>
-                                    150000
+                                    {price}
                                 </Price>
                             </div>
                         </div>
