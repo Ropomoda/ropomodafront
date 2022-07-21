@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { connect } from "react-redux";
 import ShopLayout from '../components/layout/shopLayout';
 import ProductItem from '../components/productItem';
-import { getSampleData } from '../store/actions/sampleAction';
 const { Panel } = Collapse;
 
 
@@ -14,10 +13,10 @@ const text = `
 
 
 
-function Home({ getSampleData }) {
+function Home({  }) {
 
     useEffect(() => {
-        getSampleData();
+        //getSampleData();
     }, []);
 
 
@@ -96,7 +95,7 @@ function Home({ getSampleData }) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getSampleData: () => dispatch(getSampleData),
+        //getSampleData: () => dispatch(getSampleData),
     }
 }
 export default connect(undefined, mapDispatchToProps)(Home)

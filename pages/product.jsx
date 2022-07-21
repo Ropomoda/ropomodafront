@@ -1,6 +1,6 @@
 import { Button, Card, Col, Divider, Image, Row } from 'antd';
 import ShopLayout from '../components/layout/shopLayout';
-import Carousel from '../components/carousel';
+import Collection from '../components/collection';
 import { numberWithCommas, persianNumber } from '../utils/utils';
 import { useState } from 'react';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
@@ -86,10 +86,12 @@ export default function Home() {
       </Row>
       <Row>
 
-        <Carousel
+        <Collection
           title="جدید‌ترین محصولات"
           containerClassName="pt-12 pb-4"
-          items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
+          items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]}
+          colorHex="#ffe25b"
+          badgeText="جدید"
         />
       </Row>
     </ShopLayout>
