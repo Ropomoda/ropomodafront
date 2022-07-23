@@ -27,7 +27,7 @@ function Home({ children }) {
                 <meta name="theme-color" content="#F9AFEC" />
                 <meta name="msapplication-navbutton-color" content="#F9AFEC" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="#F9AFEC" />
-
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
                 {/* OG meta tags */}
 
                 <meta property="og:title" content="فروشگاه اینترنتی روپومدا" />
