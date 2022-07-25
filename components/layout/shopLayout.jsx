@@ -40,7 +40,7 @@ function Home({ children }) {
                 <link rel="manifest" href="/manifest.json" />
 
             </Head>
-            <div className='hidden lg:block'>
+            {/* <div className='hidden lg:block'>
                 <Link href="/search">
                     <a>
                         <img
@@ -50,7 +50,7 @@ function Home({ children }) {
                             alt="ad banner" />
                     </a>
                 </Link>
-            </div>
+            </div> */}
             <div id='ropomoda-shop-layout' className='ropomoda-shop-layout relative pb-20 sm:pb-5'>
                 <Header />
                 <Navbar />

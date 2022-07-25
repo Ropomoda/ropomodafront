@@ -1,10 +1,10 @@
 {
-    "name": "Ropo Moda",
-    "short_name": "Ropo Moda",
-    "description": "فروشگاه اینترنتی روپومدا",
+    "name": "Ropomoda",
+    "short_name": "Ropomoda",
+    "description": "فروشگاه اینترنتی مد و لباس روپومدا",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#FFF5FD",
+    "background_color": "#ffffff",
     "theme_color": "#F9AFEC",
     "orientation": "portrait-primary",
     "icons": [

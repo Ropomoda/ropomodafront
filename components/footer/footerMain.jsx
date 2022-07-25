@@ -109,7 +109,7 @@ function FooterMain() {
                     </a>
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <Image layout="fixed" src={getS3Image('ropomoda-logo-s.svg')} width={80} height={80} className="rounded-xl" />
+                    <Image layout="fixed" src={"/logo.svg"} width={80} height={80} className="rounded-xl" />
                     <div className="flex flex-col mt-2">
                         <p className="text-black bold my-0 py-0 mt-2">
                             حــــس خـــوب

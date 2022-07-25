@@ -4,9 +4,10 @@ import styles from './styles.module.scss';
 import ImageLoader from './imageLoader';
 import Link from 'next/link';
 import Price from '../utils/price';
+import { getProductFullCode } from '../../utils/product';
 
 const Home = ({ wrapperClassName = "", productInfo = {} }) => {
-    const { name, price, count, collectionInfo = null, image = null } = productInfo;
+    const { code, name, price, count, collectionInfo = null, image = null } = productInfo;
     const { collectionName = null, collectionPrimaryColorHex = null } = collectionInfo || {};
     const wrapRibbonBadge = (child, collectionName, collectionPrimaryColorHex) => {
         return isValueHollow(collectionName) ? child : <Badge.Ribbon placement='start' text={collectionName} color={collectionPrimaryColorHex}>
@@ -15,8 +16,8 @@ const Home = ({ wrapperClassName = "", productInfo = {} }) => {
 
     }
     return (
-        <div className={`ml-3 h-full ${wrapperClassName}`}>
-            <Link href="/product">
+        <Link href={`/product/${getProductFullCode(code)}`}>
+            <div className={`ml-3 h-full ${wrapperClassName}`}>
                 {wrapRibbonBadge(<Card className='h-full cursor-pointer'>
                     <div className={`flex flex-col ${styles["product-item-wrapper"]} h-full`}>
                         <ImageLoader
@@ -37,8 +38,8 @@ const Home = ({ wrapperClassName = "", productInfo = {} }) => {
                         </div>
                     </div>
                 </Card>, collectionName, collectionPrimaryColorHex)}
-            </Link>
-        </div >
+            </div >
+        </Link>
     )
 }
 
