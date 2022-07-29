@@ -1,0 +1,164 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  labels:
+    app: ropomoda-front-master
+  name: ropomoda-front-master
+spec:
+  lookupPolicy:
+    local: false
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: ropomoda-front-master
+    method: github
+  name: ropomoda-front-master
+spec:
+  failedBuildsHistoryLimit: 5
+  output:
+    to:
+      kind: ImageStreamTag
+      name: ropomoda-front-master:latest
+  resources:
+    limits:
+      cpu: 2000m
+      ephemeral-storage: 1G
+      memory: 2G
+    requests:
+      cpu: 2000m
+      ephemeral-storage: 1G
+      memory: 2G
+  source:
+    git:
+      uri: https://github.com/RopoModa/ropomodafront
+      ref: master
+    type: Git
+    sourceSecret:
+      name: github-secret-olgd5e4w
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: arvanbuilder:ArvanBuilder
+        namespace: openshift
+      env:
+        - name: NEXT_PUBLIC_API_BASE_URL
+          value: https://api.ropomoda.com/api/v1/
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+    - type: ConfigChange
+---
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: ropomoda-front-master
+  name: ropomoda-front-master
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: ropomoda-front-master
+    deploymentconfig: ropomoda-front-master
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources:
+      limits:
+        &a1
+        cpu: "2"
+        memory: 3G
+        ephemeral-storage: 3G
+      requests: *a1
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+      labels:
+        app: ropomoda-front-master
+        deploymentconfig: ropomoda-front-master
+    spec:
+      containers:
+        - image: docker-registry.default.svc:5000/frsrsr/ropomoda-front-master
+          imagePullPolicy: Always
+          name: ropomoda-front-master
+          ports:
+            - containerPort: 80
+              protocol: TCP
+              name: http
+          resources:
+            limits: *a1
+            requests: *a1
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "80"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - ropomoda-front-master
+        from:
+          kind: ImageStreamTag
+          name: ropomoda-front-master:latest
+        lastTriggeredImage: ""
+      type: ImageChange
+---
+data:
+  installationID: Mjc1NzYwODQ=
+  password: Z2h1X2FtcFpMcWFNQ1RvNndTSER0RmxHSzZKVGdsMW5kNDFYa1gxbA==
+  username: Um9wb01vZGE=
+kind: Secret
+type: kubernetes.io/basic-auth
+metadata:
+  name: github-secret-olgd5e4w
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: ropomoda-front-master-custom
+spec:
+  host: www.ropomoda.com
+  port:
+    targetPort: http
+  tls:
+    insecureEdgeTerminationPolicy: Allow
+    termination: edge
+  to:
+    kind: Service
+    name: ropomoda-front-master
+    weight: 100
+  wildcardPolicy: None
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ropomoda-front-master
+  name: ropomoda-front-master
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+  selector:
+    app: ropomoda-front-master
+  type: ClusterIP
