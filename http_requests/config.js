@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.ropomoda.com/api/v1/";
+export const BASE_URL = process.env["NEXT_PUBLIC_API_URL"];
 
 export const customerConfig = () => {
     return {

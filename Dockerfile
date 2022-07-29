@@ -5,6 +5,7 @@ RUN yarn install --frozen-lockfile
 
 FROM node:lts as builder
 
+ARG NEXT_PUBLIC_API_URL=https://api.ropomoda.com/v1/
 WORKDIR /nextl
 COPY . .
 COPY --from=dependencies /nextl/node_modules ./node_modules
