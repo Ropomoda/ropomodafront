@@ -69,7 +69,7 @@ function Home({ account, logout }) {
                                     </div>}
                                     title={<p>{name} عزیز</p>}
                                     trigger="click"
-                                    placement="bottomLeft"
+                                    placement="bottomRight"
                                 >
                                     <Button className="mr-2" size="large">
                                         <i className="fal fa-user mx-1"></i>
