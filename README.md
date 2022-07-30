@@ -1,6 +1,7 @@
 This is [Ropomoda](https://www.ropomoda.com/) frontend project 
 
-![build](https://github.com/RopoModa/ropomodafront/actions/workflows/node.js.yml/badge.svg)
+![build and test with node js](https://github.com/RopoModa/ropomodafront/actions/workflows/node.js.yml/badge.svg)
+![build and push on registry.ropomoda.com](https://github.com/RopoModa/ropomodafront/actions/workflows/docker-image.js.yml/badge.svg)
 
 ## Ropomoda Front-end project
 
