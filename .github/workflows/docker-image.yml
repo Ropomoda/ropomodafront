@@ -11,7 +11,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    env:
+      TAG: date + %s
     steps:
       - uses: actions/checkout@v3
       - name: Login to image repository
@@ -21,8 +22,11 @@ jobs:
               username: ${{ secrets.REGISTRY_USERNAME }}
               password: ${{ secrets.REGISTRY_PASSWORD }}
 
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag frontend:$(date +%s)
+      - name: Build the Docker image 
+        run: docker build . --file Dockerfile --tag frontend:$(TAG)
 
       - name: Push the Docker image
-        run: docker push frontend:latest
+        run: docker push frontend:$(TAG)
+        
+      - name: Echo tag
+        run: echo $(TAG)
