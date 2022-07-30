@@ -31,7 +31,7 @@ jobs:
               password: ${{ secrets.REGISTRY_PASSWORD }}
 
       - name: Build the Docker image 
-        run: docker build . --file Dockerfile --tag "frontend:$TAG_NAME"
+        run: docker build . --file Dockerfile --tag frontend:$TAG_NAME
 
       - name: Push the Docker image
         run: docker push frontend:$TAG_NAME
