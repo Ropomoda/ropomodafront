@@ -8,4 +8,7 @@
     pointer-events: none;
     user-drag: none; 
     user-select: none;
+    &:active{
+        transform: scale(0.9);
+    }
 }

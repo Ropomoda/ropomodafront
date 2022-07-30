@@ -1,7 +1,7 @@
 const modifyVars = {
   "@primary-color": "#F9AFEC",
 
-  "@border-radius-base": "22px",
+  "@border-radius-base": "12px",
   // Buttons 
   "@btn-font-weight": 400,
   "@btn-height-lg":"50px",

@@ -9,32 +9,49 @@
 sup.ant-badge-count{
   background-color: $primary;
 }
-
+button.ant-btn{
+  transition: transform 0.15s ease-in-out;
+  &:active{
+    transform: scaleX(0.951) scaleY(0.951);
+  }
+}
 button.ant-btn.ant-btn-primary{
   border: none;
-  box-shadow: inset 7px 7px 10px #ffecfb;
+  box-shadow: inset 5px 5px 7px #ffecfb;
   
   &:hover ,&:focus{
-    box-shadow: inset 6px 6px 10px $primary;
+    box-shadow: inset 5px 5px 7px $primary;
     color: rgb(66, 66, 66);
   }
   &:active{
-    box-shadow: inset 6px 6px 10px #F9E0F4;
+    box-shadow: inset 5px 5px 7px #F9E0F4;
   }
 }
+button.ant-switch{
+  
+  &.ant-switch-checked{
+    box-shadow: inset 5px 5px 7px #fff2fd;
+    &:hover ,&:focus,&:active{
+      box-shadow: inset 5px 5px 7px #fff2fd;
+    }
+  }
+  &[aria-checked=false]{
+    box-shadow: inset 5px 5px 7px #808080;
+    &:hover ,&:focus,&:active{
+      box-shadow: inset 5px 5px 7px #808080;
+    }
+  }
+  .ant-switch-handle{
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    right: 4px;
+  }
+  &:active{
+   
+  }
+} 
 
-button.ant-switch.ant-switch-checked{
-  box-shadow: inset 5px 5px 10px #fff2fd;
-  &:hover ,&:focus,&:active{
-    box-shadow: inset 5px 5px 10px #fff2fd;
-  }
-}
-button.ant-switch[aria-checked=false]{
-  box-shadow: inset 5px 5px 10px #808080;
-  &:hover ,&:focus,&:active{
-    box-shadow: inset 5px 5px 10px #808080;
-  }
-}
 
 .react-multiple-carousel__arrow{
   border: solid 1px rgb(208, 208, 208) !important;

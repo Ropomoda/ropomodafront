@@ -45,12 +45,17 @@ const Home = ({
     }
   }
   useEffect(() => {
+    setProductList([
+      {
+        title:"بلوز زنانه مجلسی"
+      }
+    ]);
     //getCollectionData();
   }, []);
 
   return (
     <div className={`${containerClassName}`}>
-      <WrapperCard className={`carousel-wrapper ${styles[`carousel-wrapper--${type}`]}`} >
+      <WrapperCard className={`${styles[`carousel-wrapper`]} carousel-wrapper ${styles[`carousel-wrapper--${type}`]}`} >
         <Carousel
           ssr
           partialVisible
