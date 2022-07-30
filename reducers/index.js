@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import sampleReducer from "./sampleReducer";
+import accountReducer from "./accountReducer";
+import contentReducer from "./contentReducer";
 
 export default combineReducers({
-    profile: sampleReducer,
+    account: accountReducer,
+    content: contentReducer
 });

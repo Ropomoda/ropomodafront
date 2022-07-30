@@ -96,7 +96,7 @@ function FooterMain() {
                     key={index} />)}
                 <div className="w-full flex flex-col items-center my-4 sm:mx-5">
                     <a href="mailto:support@ropomoda.com" className="w-72 text-lg my-2 flex flex-row items-center justify-between text-black border-solid border-1 border-gray-300 rounded-2xl px-6 py-2">
-                        support@ropomoda.com
+                        customer@ropomoda.com
                         <i className="fal fa-envelope mr-3" />
                     </a>
                     <a href="sms:+9830004523946130" className="w-72 text-lg my-2 flex flex-row items-center justify-between text-black border-solid border-1 border-gray-300 rounded-2xl px-6 py-2">

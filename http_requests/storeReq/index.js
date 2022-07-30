@@ -1,5 +1,7 @@
 import * as productReq from './product.req';
 
-export const storeReq = {
+
+const storeReq = {
     ...productReq
-}
+};
+export default storeReq;

@@ -45,7 +45,7 @@ const Home = ({
     }
   }
   useEffect(() => {
-    getCollectionData();
+    //getCollectionData();
   }, []);
 
   return (

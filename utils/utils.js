@@ -27,7 +27,7 @@ export const numberWithCommas = (number, decimals = 2) => {
 export const getS3Image = (name , bucket = "public-statics") => {
   switch (bucket) {
     case "public-statics":
-      return `https://ropomoda-public-staticfiles.s3.ir-thr-at1.arvanstorage.com/${name}`;
+      return `https://rmstatics-public.ropomoda.com/${name}`;
     default:
       return `https://ropomoda.com/${name}`;
   }

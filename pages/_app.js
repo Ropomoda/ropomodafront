@@ -13,14 +13,13 @@ import NProgress from 'nprogress'; //nprogress module
 
 //Binding events. 
 NProgress.configure({
-  showSpinner:false,
+  showSpinner: false,
 })
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
-
   useEffect(() => {
     ReactGA.initialize('G-7GN93PD1BK');
     ReactGA.pageview(window.location.pathname + window.location.search);

@@ -1,14 +1,19 @@
-import { Badge, Button, ConfigProvider, Input, Tooltip } from "antd";
+import { Badge, Button, ConfigProvider, Input, Popover, Tooltip } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Login from '../login';
 import BasketDrawer from '../basket/basketDrawer';
 import stickybits from "stickybits";
+import { connect } from "react-redux";
+import { getS3Image } from "../../utils/utils";
+import { logout } from "../../actions/accountAction";
 
 
-function Home() {
-    const [loginModalVisible, setLoginModalVisible] = useState(false);
+function Home({ account, logout }) {
+    const { token = null, profile } = account || {};
+    const { name = "" } = profile || {};
+    console.log(account);
     const [basketDrawerVisible, setBasketDrawerVisible] = useState(false);
     const loginModalClickHandler = (status = false) => {
         setLoginModalVisible(status);
@@ -26,46 +31,95 @@ function Home() {
 
     return (
         <>
-            <div id="header-wrapper" className="bg-white z-20">
+            <div id="header-wrapper" className="bg-white z-20 container mx-auto">
                 <header>
-                    <div className="px-2 sm:px-5 flex flex-row items-center justify-between pt-2 sm:pt-3 pb-2">
-                        <div className="flex flex-row items-center sm:w-1/3 w-full">
+                    <div className="flex flex-row items-center justify-end sm:justify-between pt-2 sm:pt-3 pb-2">
+                        <div className="flex-row">
+                            {!!token ? <>
+                                <Popover
+                                    content={<div>
+                                        <Link href="/user/profile">
+                                            <a size="large" className="w-full" type="link">
+                                                <span className="w-full text-black flex justify-between items-center my-3">
+                                                    <span>
+                                                        حساب کاربری
+                                                    </span>
+                                                    <i className="fal fa-user" />
+                                                </span>
+                                            </a>
+                                        </Link>
+                                        <a size="large" className="w-full" type="link">
+                                            <span className="w-full text-black flex justify-between items-center my-3">
+                                                <span>
+                                                    روپوکلاب
+                                                </span>
+                                                <span className="soon-badge">
+                                                    بزودی
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <a onClick={() => { logout() }} size="large" className="w-full" type="link">
+                                            <span className="w-full text-black flex justify-between items-center my-3">
+                                                <span>
+                                                    خروج
+                                                </span>
+                                                <i className="fal fa-door-open" />
+                                            </span>
+                                        </a>
+                                    </div>}
+                                    title={<p>{name} عزیز</p>}
+                                    trigger="click"
+                                    placement="bottomLeft"
+                                >
+                                    <Button className="mr-2" size="large">
+                                        <i className="fal fa-user mx-1"></i>
+                                    </Button>
+                                </Popover>
+                                <Link href="/user/wishlist">
+                                    <Tooltip title="علاقه‌مندی ها" >
+                                        <Button className="mr-2" size="large">
+                                            <i className="fal fa-heart text-black mx-1"></i>
+                                        </Button>
+                                    </Tooltip>
+                                </Link>
+                                <Badge size="small" count={'۱'} offset={[35, 30]} >
+                                    <Tooltip title="سبد خرید" >
+                                        <Button onClick={() => { basketDrawerClickHandler(true) }} className="mr-2 sm:block hidden" size="large">
+                                            <i className="fal fa-shopping-bag text-black mx-1"></i>
+                                        </Button>
+                                    </Tooltip>
+                                </Badge>
+                            </> : <>
+                                <Link href="/user/login">
+                                    <Button className="mr-2" size="large">
+                                        <i className="fal fa-user ml-2"></i>
+                                        ورود یا ثبت‌نام
+                                    </Button>
+                                </Link>
+                                <Badge size="small" count={'۱'} offset={[35, 30]} >
+                                    <Tooltip title="سبد خرید" >
+                                        <Button onClick={() => { basketDrawerClickHandler(true) }} className="mr-2 sm:block hidden" size="large">
+                                            <i className="fal fa-shopping-bag text-black mx-1"></i>
+                                        </Button>
+                                    </Tooltip>
+                                </Badge>
+                            </>}
+                        </div>
+                        <div className="flex flex-row items-center">
                             <div className="hidden sm:block">
                                 <Link href="/">
                                     <Image
                                         className="cursor-pointer"
-                                        src="/RopoModa.png"
+                                        src={getS3Image("ropomoda.svg")}
                                         width={270}
                                         height={75}
                                         alt="ropomoda" />
                                 </Link>
                             </div>
-                            <Input
-                                dir="rtl"
-                                enterButton={null}
-                                suffix={
-                                    <i className="fal fa-search" />
-                                }
-                                size="large"
-                                placeholder="دنبال چ میگردی؟" />
-                        </div>
-                        <div className="hidden sm:block">
-                            <Button className="mr-2" onClick={() => { loginModalClickHandler(true) }} size="large" type="primary">
-                                <i className="fal fa-user ml-2"></i>
-                                ورود یا ثبت‌نام
-                            </Button>
-                            <Badge size="small" count={'۱'} offset={[35, 30]} >
-                                <Tooltip title="سبد خرید" >
-                                    <Button onClick={() => { basketDrawerClickHandler(true) }} className="mr-2" type="link" size="large">
-                                        <i className="fal fa-shopping-bag text-black"></i>
-                                    </Button>
-                                </Tooltip>
-                            </Badge>
                         </div>
                     </div>
                 </header>
             </div>
-            <Login visible={loginModalVisible} onCancel={() => { loginModalClickHandler(false) }} />
             <BasketDrawer
                 visible={basketDrawerVisible}
                 onClose={() => { basketDrawerClickHandler(false) }}
@@ -73,5 +127,12 @@ function Home() {
         </>
     )
 }
-
-export default Home
+const mapStateToProps = (state, ownProps) => ({
+    account: state?.account,
+});
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => dispatch(logout()),
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

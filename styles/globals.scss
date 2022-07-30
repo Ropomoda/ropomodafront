@@ -66,3 +66,11 @@ body {
 .rtl {
   direction: rtl !important;
 }
+
+.soon-badge{
+  color: #fff;
+  padding: 1px 5px;
+  font-size: 10px;
+  background-color: $primary;
+  border-radius: 20px;
+}

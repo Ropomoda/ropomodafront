@@ -1,8 +1,7 @@
 import { Button, Card, Col, Divider, Image, Row } from 'antd';
-import ShopLayout from '../components/layout/shopLayout';
-import Collection from '../components/collection';
-import { numberWithCommas, persianNumber } from '../utils/utils';
-import { useState } from 'react';
+import ShopLayout from '../../components/layout/shopLayout';
+import Collection from '../../components/collection';
+import { numberWithCommas, persianNumber } from '../../utils/utils';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 
 export default function Home() {
@@ -83,16 +82,6 @@ export default function Home() {
             </div>
           </Card>
         </Col>
-      </Row>
-      <Row>
-
-        <Collection
-          title="جدید‌ترین محصولات"
-          containerClassName="pt-12 pb-4"
-          items={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]}
-          colorHex="#ffe25b"
-          badgeText="جدید"
-        />
       </Row>
     </ShopLayout>
   )
