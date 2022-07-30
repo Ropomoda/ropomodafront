@@ -33,10 +33,10 @@ jobs:
       - name: Build the Docker image 
         env:
           TAG_NAME: v${{ steps.date.outputs.date }}
-        run: docker build . --file Dockerfile --tag frontend:$TAG_NAME
+        run: docker build . --file Dockerfile --tag registry.ropomoda.com/frontend:$TAG_NAME
 
       - name: Push the Docker image
         env:
           TAG_NAME: v${{ steps.date.outputs.date }}
-        run: docker push frontend:$TAG_NAME
+        run: docker push registry.ropomoda.com/frontend:$TAG_NAME
 
