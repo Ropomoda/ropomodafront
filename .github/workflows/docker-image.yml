@@ -23,3 +23,6 @@ jobs:
 
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag frontend:$(date +%s)
+
+      - name: Push the Docker image
+        run: docker push frontend:latest
