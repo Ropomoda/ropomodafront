@@ -7,7 +7,11 @@ function Home() {
 
     return (
         <div>
-            <Login visible={true} closeLogin={() => { router.push("/") }} />
+            <Login
+                visible={true}
+                closeLogin={() => { router.push("/") }}
+                onOk={() => { }}
+            />
         </div>
     )
 }
