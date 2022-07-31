@@ -1,20 +1,26 @@
 import { Button, Card, Col, Empty, Row } from "antd"
 import { numberWithCommas, persianNumber } from '../../utils/utils'
 import Price from "../utils/price";
+import CartItem from "./cartItem";
+import { connect } from 'react-redux';
 
-function Home() {
+
+function Home({ cartItems }) {
     const shippingCost = 0;
     const productsTotalCost = 885000;
     const discount = 340000;
     const discountPercent = ((discount / productsTotalCost) * 100).toFixed(0);
     const payable = productsTotalCost + shippingCost - discount;
-  
-    
+
+
     return (
         <Row gutter={20} className="items-center justify-center">
             <Col lg={18} span={24} className="mb-3">
                 <Card>
-                    <div className='flex flex-col justify-center items-center my-5 text-center'>
+                    {cartItems.length > 0 ? <div>
+                        {cartItems.map((item, index) => <CartItem {...item} key={index} />)}
+                        
+                    </div> : <div className='flex flex-col justify-center items-center my-5 text-center'>
                         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="" />
                         <h3 className='text-2xl mt-2'>سبد خرید شما خالی است!</h3>
                         <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت </p>
@@ -25,7 +31,7 @@ function Home() {
                             </span>
                             <Button type='link'>پیشنهاداتی برای شما</Button>
                         </div>
-                    </div>
+                    </div>}
                 </Card>
             </Col>
             <Col lg={6} span={24} className="mb-3">
@@ -80,4 +86,12 @@ function Home() {
     )
 }
 
-export default Home
+const mapStateToProps = (state, ownProps) => ({
+    cartItems: state?.cart?.items || [],
+});
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteCartItem: (productId) => dispatch(deleteCartItem(productId)),
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -1,6 +1,6 @@
 import { Row } from 'antd';
 import ShopLayout from '../../components/layout/shopLayout';
-import Basket from '../../components/basket';
+import Basket from '../../components/cart';
 
 
 

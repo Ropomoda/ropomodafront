@@ -10,7 +10,7 @@ function Price({ children, wrapperClassName = "", type = "normal" }) {
         <div className={`flex flex-row justify-center items-center ${wrapperClassName}`}>
             <span className={`${type === "through" && "line-through"}`}>{persianNumber(numberWithCommas(Number(children) / 10))}</span>
             {type !== "through" ? <div className="mr-1 text-xs">
-                تومن
+                تومان
             </div> : <div></div>}
         </div>
     )

@@ -1,54 +1,92 @@
-import { Button, Card, Col, Divider, Image, Row } from 'antd';
+import { Button, Card, Col, Divider, Image, Input, Row } from 'antd';
 import ShopLayout from '../../components/layout/shopLayout';
 import Collection from '../../components/collection';
 import { numberWithCommas, persianNumber } from '../../utils/utils';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react';
+import { calculatePriceDiscountPercent } from '../../utils/price';
+import httpReq from '../../http_requests';
+import { getProductAbsoluteCode } from '../../utils/product';
+import { addItemToCart, deleteCartItem } from '../../actions/cartActions';
+import { connect } from "react-redux";
+import * as R from 'ramda';
 
-export default function Home() {
-  const shippingCost = 28000;
-  const productsTotalCost = 885000;
-  const discount = 340000;
-  const discountPercent = ((discount / productsTotalCost) * 100).toFixed(0);
-  const payable = productsTotalCost + shippingCost - discount;
-
+function Home({ addItemToCart, deleteCartItem, cartItems }) {
+  const router = useRouter();
+  const queryCode = router.query?.code;
+  const code = getProductAbsoluteCode(queryCode);
+  const [cartItem, setCartItem] = useState(undefined);
+  const [productDetail, setProductDetail] = useState({});
+  const { uuid, title_fa, rrp_price, selling_price, max_quantity = null, main_image = null } = productDetail;
+  const discountPrice = rrp_price - selling_price;
+  const discountPercent = calculatePriceDiscountPercent(rrp_price, selling_price);
+  const checkProductIsInCart = (uuid) => {
+    const findProduct = ({ product }) => {
+      const productId = product?.uuid || "";
+      return uuid === productId
+    }
+    const cartItem = R.find(findProduct, cartItems);
+    return cartItem || undefined;
+  }
+  const getSingleProductData = async (code) => {
+    try {
+      const { data = {} } = await httpReq.storeReq.getSingleProduct({ code: code });
+      setProductDetail(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const addProductToCartHandler = (uuid, quantity = 1) => {
+    addItemToCart(uuid, quantity);
+  }
+  const deleteCartItemHandler = (cartItemId) => {
+    deleteCartItem(cartItemId);
+  }
+  useEffect(() => {
+    getSingleProductData(code);
+  }, []);
+  useEffect(() => {
+    setCartItem(checkProductIsInCart(uuid));
+  }, [productDetail, cartItems]);
   return (
     <ShopLayout>
       <Row gutter={5} className="container mx-auto pt-8">
-        <Col span={18}>
+        <Col span={24} sm={18}>
           <Card>
-            <div className='flex flex-row'>
+            <div className='flex flex-col sm:flex-row'>
               <TransformWrapper >
                 <TransformComponent>
                   <Image
-                    width={400}
-                    height={400}
+                    width={300}
+                    height={300}
                     preview={{
-                      mask: <>نمایش</>
+                      mask: <>بزرگ‌نمایی</>
                     }}
-                    src={`https://dkstatics-public.digikala.com/digikala-products/3fc048be1c5400cc15c1a4620b0a0f5282aab53c_1652944681.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800/quality,q_90`} alt="test" />
+                    src={main_image} alt={title_fa} />
                 </TransformComponent>
               </TransformWrapper>
               <div className='flex flex-col justify-start mr-3'>
-                <h1 className='text-lg'>پیراهن آستین بلند زنانه آیبکس مدل 1030رنگ سرمه ای</h1>
+                <h1 className='text-lg'>{title_fa}</h1>
                 <Divider />
               </div>
             </div>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col span={24} sm={6}>
           <Card>
-            <div className='flex flex-col'>
+            <div className='flex flex-col justify-between'>
               <div className='flex flex-row justify-between'>
                 <span>
-                  قیمت کالاها ({persianNumber(2)})
+                  قیمت
                 </span>
                 <span>
-                  {persianNumber(numberWithCommas(productsTotalCost))}
+                  {persianNumber(numberWithCommas(rrp_price))}
                 </span>
               </div>
               <div className='flex flex-row justify-between mt-3 font-extrabold text-red-500'>
                 <span>
-                  مجموع تخفیف
+                  تخفیف
                   <i className='fal fa-badge-percent mr-2' />
                 </span>
                 <div>
@@ -56,29 +94,46 @@ export default function Home() {
                     (٪{persianNumber(discountPercent)})
                   </span>
                   <span>
-                    {persianNumber(numberWithCommas(discount))}
+                    {persianNumber(numberWithCommas(discountPrice))}
                   </span>
                 </div>
-              </div>
-              <div className='flex flex-row justify-between mt-3'>
-                <span>
-                  هزینه ارسال
-                  <i className='fal fa-truck mr-2' />
-                </span>
-                <span>
-                  {persianNumber(numberWithCommas(shippingCost))}
-                </span>
               </div>
               <div className='flex flex-row justify-between mt-16 text-lg font-bold'>
                 <span>قابل پرداخت</span>
                 <span>
-                  {persianNumber(numberWithCommas(payable))}
+                  <span>
+                    {persianNumber(numberWithCommas(selling_price))}
+                  </span>
                 </span>
               </div>
-
-              <Button type='primary' size='large' className='flex flex-row items-center mt-5'>
-                افزودن به سبد خرید
-              </Button>
+              <div className='mt-8'>
+                {cartItem ? <div className='flex flex-row justify-center items-center'>
+                  <Button disabled type='ghost' size='large' className='ml-1'>
+                    <i className='fal fa-angle-up text-xl mx-1 text-red-500' />
+                  </Button>
+                  <Input
+                    max={max_quantity}
+                    min={1}
+                    type="number"
+                    size='large'
+                    className='text-center'
+                    defaultValue={cartItem?.quantity} />
+                  <Button
+                    onClick={() => { deleteCartItemHandler(cartItem.uuid) }}
+                    type='ghost'
+                    size='large'
+                    className='mr-1'>
+                    <i className='fal fa-trash text-xl mx-1 text-red-500' />
+                  </Button>
+                </div> :
+                  <Button
+                    onClick={() => { addProductToCartHandler(uuid) }}
+                    type='primary'
+                    size='large'
+                    className='flex flex-row items-center w-full'>
+                    افزودن به سبد خرید
+                  </Button>}
+              </div>
             </div>
           </Card>
         </Col>
@@ -86,3 +141,14 @@ export default function Home() {
     </ShopLayout>
   )
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  cartItems: state?.cart?.items || [],
+});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteCartItem: (productId) => dispatch(deleteCartItem(productId)),
+    addItemToCart: (productId, quantity) => dispatch(addItemToCart(productId, quantity)),
+  }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

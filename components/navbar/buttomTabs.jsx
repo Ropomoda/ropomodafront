@@ -29,7 +29,7 @@ const BottomTabs = () => {
             icon: getTabIcon("/categories", "list"),
         },
         {
-            key: '/user/basket',
+            key: '/user/cart',
             title: 'سبد خرید',
             icon: getTabIcon("/basket", "shopping-bag"),
         },

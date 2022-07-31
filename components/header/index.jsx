@@ -2,17 +2,18 @@ import { Badge, Button, ConfigProvider, Input, Popover, Tooltip } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import BasketDrawer from '../basket/basketDrawer';
+import BasketDrawer from '../cart/cartDrawer';
 import stickybits from "stickybits";
 import { connect } from "react-redux";
-import { getS3Image } from "../../utils/utils";
+import { getS3Image, persianNumber } from "../../utils/utils";
 import { logout } from "../../actions/accountAction";
 import { useMobile } from "../../hooks/screanSize.hook";
 
 
-function Home({ account, logout }) {
+function Home({ account, logout, cartItems }) {
     const { token = null, profile } = account || {};
     const { name = "" } = profile || {};
+    const cartItemCount = cartItems?.length && cartItems?.length !== 0 ? persianNumber(cartItems?.length) : "";
     const { isMobile } = useMobile();
     const [basketDrawerVisible, setBasketDrawerVisible] = useState(false);
     const loginModalClickHandler = (status = false) => {
@@ -82,7 +83,7 @@ function Home({ account, logout }) {
                                         </Button>
                                     </Tooltip>
                                 </Link>
-                                <Badge size="small" count={'۱'} offset={[37, 33]} >
+                                <Badge size="small" count={persianNumber(cartItemCount)} offset={[37, 33]} >
                                     <Tooltip title="سبد خرید" >
                                         <Button onClick={() => { basketDrawerClickHandler(true) }} className="mr-2 sm:block hidden" size="large">
                                             <i className="fal fa-shopping-bag text-black mx-1"></i>
@@ -90,7 +91,7 @@ function Home({ account, logout }) {
                                     </Tooltip>
                                 </Badge>
                             </> : <>
-                                <Badge size="small" count={'۱'} offset={[37, 33]} >
+                                <Badge size="small" count={persianNumber(cartItemCount)} offset={[37, 33]} >
                                     <Tooltip title="سبد خرید" >
                                         <Button onClick={() => { basketDrawerClickHandler(true) }} className="mr-2 sm:block hidden" size="large">
                                             <i className="fal fa-shopping-bag text-black mx-1"></i>
@@ -131,6 +132,7 @@ function Home({ account, logout }) {
 }
 const mapStateToProps = (state, ownProps) => ({
     account: state?.account,
+    cartItems: state?.cart?.items || []
 });
 const mapDispatchToProps = (dispatch) => {
     return {

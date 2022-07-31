@@ -5,8 +5,8 @@ import CarouselHead from './carouselHead';
 import "react-multi-carousel/lib/styles.css";
 import ProductItem from '../productItem';
 import WrapperCard from "./wrapperCard";
-import { storeReq } from "../../http_requests/storeReq";
 import { useEffect, useState } from "react";
+import httpReq from "../../http_requests";
 
 
 const Home = ({
@@ -37,20 +37,14 @@ const Home = ({
   };
   const getCollectionData = async () => {
     try {
-      const { data } = await storeReq.getAllProducts();
-      const { results = [] } = data;
-      setProductList(results);
+      const { data = [] } = await httpReq.storeReq.getAllProducts();
+      setProductList(data);
     } catch (err) {
       console.log(err);
     }
   }
   useEffect(() => {
-    setProductList([
-      {
-        title:"بلوز زنانه مجلسی"
-      }
-    ]);
-    //getCollectionData();
+    getCollectionData();
   }, []);
 
   return (
