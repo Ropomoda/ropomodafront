@@ -1,3 +1,4 @@
+import { Tooltip } from "antd";
 import { TabBar } from "antd-mobile";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -6,52 +7,51 @@ import styles from './styles.module.scss';
 
 
 const BottomTabs = () => {
-    const [active, setActive] = useState("/home");
+    let active = "/";
+    if (typeof window !== "undefined") {
+        active = window ? window?.location?.pathname : "/";
+    }
     const router = useRouter()
 
     const setRouteActive = (value) => {
         router.push(value);
-        setActive(value);
     }
-    const getTabIcon = (key, iconKey) => {
-        return <i className={`fa${key === active ? "s" : "l"} fa-${iconKey}`} />
+    const getTabIcon = (key, iconKey, title = "") => {
+        return <Tooltip title={title}>
+            <i className={`fa${key === active ? "s" : "l"} fa-${iconKey} text-2xl`} />
+        </Tooltip>
     }
-    
+
     const tabs = [
         {
             key: '/',
-            title: 'روپومدا',
-            icon: getTabIcon("/home", "home"),
+            icon: getTabIcon("/", "home", "روپومدا"),
         },
         {
             key: '/categories',
-            title: 'دسته‌بندی ها',
-            icon: getTabIcon("/categories", "list"),
+            icon: getTabIcon("/categories", "list", "دسته‌بندی ها"),
         },
         {
             key: '/user/cart',
-            title: 'سبد خرید',
-            icon: getTabIcon("/basket", "shopping-bag"),
+            icon: getTabIcon("/user/cart", "shopping-bag", "سبد خرید"),
         },
         {
             key: '/user/profile',
-            title: 'پروفایل',
-            icon: getTabIcon("/profile", "user"),
+            icon: getTabIcon("/user/profile", "user", "پروفایل"),
         },
     ]
 
     return (
         <div className={`fixed bottom-0 w-full bg-white z-20 ${styles["bottom-tabs-wrapper"]} py-1`}>
-            <TabBar safeArea activeKey={active} onChange={value => setRouteActive(value)}>
+            <TabBar className="py-3" safeArea activeKey={active} onChange={value => setRouteActive(value)}>
                 {tabs.map(item => (
                     <TabBar.Item
-                        key={item.key}
+                        key={item?.key}
                         icon={item.icon}
-                        title={item.title}
                         badge={item?.badge || undefined} />
                 ))}
             </TabBar>
-        </div>
+        </div >
     )
 }
 

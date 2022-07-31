@@ -11,15 +11,23 @@ import { getProductAbsoluteCode } from '../../utils/product';
 import { addItemToCart, deleteCartItem } from '../../actions/cartActions';
 import { connect } from "react-redux";
 import * as R from 'ramda';
-
+interface productModel {
+  uuid: string;
+  title_fa: string;
+  title_en: string;
+  rrp_price: Number;
+  selling_price: Number;
+  max_quantity: Number;
+  main_image?: string;
+}
 function Home({ addItemToCart, deleteCartItem, cartItems }) {
   const router = useRouter();
-  const queryCode = router.query?.code;
+  const queryCode: string = router.query?.code;
   const code = getProductAbsoluteCode(queryCode);
   const [cartItem, setCartItem] = useState(undefined);
-  const [productDetail, setProductDetail] = useState({});
+  const [productDetail, setProductDetail] = useState<productModel>();
   const { uuid, title_fa, rrp_price, selling_price, max_quantity = null, main_image = null } = productDetail;
-  const discountPrice = rrp_price - selling_price;
+  const discountPrice: Number = rrp_price - selling_price;
   const discountPercent = calculatePriceDiscountPercent(rrp_price, selling_price);
   const checkProductIsInCart = (uuid) => {
     const findProduct = ({ product }) => {

@@ -8,7 +8,7 @@ function Home({ children, contentLoading }) {
     return (
         <main id="main-content-wrapper" className={`${styles["main-content-wrapper"]}`}>
             <Spin size='large' spinning={contentLoading}>
-                <div className='sm:container mx-auto'>
+                <div className='sm:container sm:mx-auto'>
                     {children}
                 </div>
             </Spin>

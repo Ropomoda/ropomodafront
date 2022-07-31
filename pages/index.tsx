@@ -1,7 +1,12 @@
 import ShopLayout from '../components/layout/shopLayout';
 import Collection from '../components/collection';
+import { NextPage } from 'next';
 
-export default function Home() {
+interface Props {
+
+}
+
+const Home: NextPage<Props> = () => {
   return (
     <ShopLayout>
       <Collection
@@ -27,3 +32,4 @@ export default function Home() {
     </ShopLayout>
   );
 }
+export default Home;

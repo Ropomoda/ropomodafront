@@ -1,23 +1,26 @@
-import { Row } from 'antd';
+import { Button, Col, Row } from 'antd';
 import ShopLayout from '../../components/layout/shopLayout';
 import Basket from '../../components/cart';
+import { connect } from 'react-redux';
+import Link from 'next/link';
 
 
 
-function Home() {
-
+function Home({ account }) {
   return (
     <ShopLayout>
-      <div className='pt-3'>
-        <Row className='my-1'>
-          <h5 className='text-md'>
-            سبد خرید
-          </h5>
-        </Row>
-        <Basket />
-      </div>
+          <Basket />
     </ShopLayout>
   )
 }
 
-export default Home
+
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

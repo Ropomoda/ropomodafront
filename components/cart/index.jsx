@@ -3,38 +3,55 @@ import { numberWithCommas, persianNumber } from '../../utils/utils'
 import Price from "../utils/price";
 import CartItem from "./cartItem";
 import { connect } from 'react-redux';
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 
 function Home({ cartItems }) {
-    const shippingCost = 0;
-    const productsTotalCost = 885000;
-    const discount = 340000;
-    const discountPercent = ((discount / productsTotalCost) * 100).toFixed(0);
-    const payable = productsTotalCost + shippingCost - discount;
+    const [productsTotalCost, setProductsTotalCost] = useState(0);
+    const [rrpPriceTotalCost, setRrpPriceTotalCost] = useState(0);
+    const discountPrice = rrpPriceTotalCost - productsTotalCost;
 
-
+    const calculateSumOfItem = (cartItems) => {
+        let productsTotalCost = 0;
+        let rrpPriceTotalCost = 0;
+        cartItems.forEach((item) => {
+            const { product, quantity } = item;
+            const { selling_price, rrp_price } = product;
+            productsTotalCost += quantity * selling_price;
+            rrpPriceTotalCost += quantity * rrp_price;
+        });
+        setProductsTotalCost(productsTotalCost);
+        setRrpPriceTotalCost(rrpPriceTotalCost);
+    }
+    useEffect(() => {
+        calculateSumOfItem(cartItems);
+    }, [cartItems]);
     return (
         <Row gutter={20} className="items-center justify-center">
             <Col lg={18} span={24} className="mb-3">
                 <Card>
                     {cartItems.length > 0 ? <div>
                         {cartItems.map((item, index) => <CartItem {...item} key={index} />)}
-                        
+
                     </div> : <div className='flex flex-col justify-center items-center my-5 text-center'>
                         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="" />
                         <h3 className='text-2xl mt-2'>سبد خرید شما خالی است!</h3>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت </p>
                         <div className='flex flex-row justify-center items-center mt-5'>
-                            <Button type='link'>محصولات حراجی</Button>
+                            <Link href={"/"}>
+                                <Button type='link'>رفتن به لیست محصولات</Button>
+                            </Link>
                             <span>
                                 |
                             </span>
-                            <Button type='link'>پیشنهاداتی برای شما</Button>
+                            <Link href={"/categories"}>
+                                <Button type='link'>دسته‌بندی ها</Button>
+                            </Link>
                         </div>
                     </div>}
                 </Card>
             </Col>
-            <Col lg={6} span={24} className="mb-3">
+            {cartItems?.length > 0 ? <Col lg={6} span={24} className="mb-3">
                 <Card>
                     <div className='flex flex-col'>
                         <div className='flex flex-row justify-between'>
@@ -51,11 +68,9 @@ function Home({ cartItems }) {
                                 <i className='fal fa-badge-percent mr-2' />
                             </span>
                             <div className="flex flex-row">
-                                <span className='ml-1'>
-                                    (٪{persianNumber(discountPercent)})
-                                </span>
+
                                 <Price>
-                                    {discount}
+                                    {discountPrice}
                                 </Price>
                             </div>
                         </div>
@@ -71,7 +86,7 @@ function Home({ cartItems }) {
                         <div className='flex flex-row justify-between mt-16 text-lg font-bold'>
                             <span>قابل پرداخت</span>
                             <Price>
-                                {payable}
+                                {productsTotalCost}
                             </Price>
                         </div>
 
@@ -81,7 +96,7 @@ function Home({ cartItems }) {
                         </Button>
                     </div>
                 </Card>
-            </Col>
+            </Col> : null}
         </Row>
     )
 }
