@@ -34,12 +34,12 @@ function Home({ children, getProfile, getUserInfo, getCartItems, account, initAc
             <Head>
                 <title>فروشگاه اینترنتی روپومدا</title>
                 {/* Seo Meta Tags */}
-                <meta name="title" content="فروشگاه اینترنتی روپومدا" />
-                <meta name="description" content="توضیحات" />
-                <meta name="keywords" content="لباس،تیشرت،مانتو" />
+                <meta name="title" content="فروشگاه اینترنتی مد و لباس روپومدا" />
+                <meta name="description" content="حس خوب با یک خرید خوب. خرید اینترنتی لباس مردانه،لباس زنانه،لباس بچه گانه،کیف و کفش از فروشگاه اینترنتی روپومدا" />
+                <meta name="keywords" content="روپومدا,ropomoda,مانتو,تیشرت,شومیز,بلوز,لباس زنانه" />
                 <meta name="robots" content="index, follow" />
                 <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-                <meta name="revisit-after" content="7 days" />
+                <meta name="revisit-after" content="3 days" />
 
                 {/* Theme Meta Tags */}
                 <meta name="theme-color" content="#F9AFEC" />
@@ -47,13 +47,6 @@ function Home({ children, getProfile, getUserInfo, getCartItems, account, initAc
                 <meta name="apple-mobile-web-app-status-bar-style" content="#F9AFEC" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
                 {/* OG meta tags */}
-
-                <meta property="og:title" content="فروشگاه اینترنتی روپومدا" />
-                <meta property="og:site_name" content="Ropo Moda" />
-                <meta property="og:url" content="ropomoda.com" />
-                <meta property="og:description" content="فروشگاه اینترنتی روپومدا" />
-                <meta property="og:type" content="business.business" />
-                <meta property="og:image" content={getS3Image("logo-fill.png")} />
 
                 <link rel="manifest" href="/manifest.json" />
 

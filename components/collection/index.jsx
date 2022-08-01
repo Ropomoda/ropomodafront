@@ -39,7 +39,7 @@ const Home = ({
   };
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
+  }
   const getCollectionData = async () => {
     setLoading(true);
     try {
@@ -50,7 +50,7 @@ const Home = ({
       setProductList(data);
     } catch (err) {
       console.log(err);
-    }finally{
+    } finally {
       setLoading(false);
     }
   }
@@ -69,7 +69,7 @@ const Home = ({
           rtl
         >
           <CarouselHead title={title} type={type} />
-          {loading ? [...Array(10)].map((_, index) => <ProductLoadingSkeleton key={index} />) : productList.map((item, index) => {
+          {loading ? [...Array(5)].map((_, index) => <ProductLoadingSkeleton key={index} />) : productList.map((item, index) => {
             return <ProductItem key={index} type={type} productInfo={
               {
                 ...item,

@@ -11,6 +11,7 @@ import { getProductAbsoluteCode } from '../../utils/product';
 import { addItemToCart, deleteCartItem } from '../../actions/cartActions';
 import { connect } from "react-redux";
 import * as R from 'ramda';
+import Head from 'next/head';
 interface productModel {
   uuid: string;
   title_fa: string;
@@ -69,6 +70,16 @@ function Home({ addItemToCart, deleteCartItem, cartItems }) {
   }, [productDetail, cartItems]);
   return (
     <ShopLayout>
+      <Head>
+        <meta property="og:title" content={title_fa} />
+        <meta property="og:site_name" content="Ropomoda.com" />
+        <meta property="og:url" content={`https://ropomoda.com/product/${queryCode}`} />
+        <meta property="og:description" content={`قیمت : ${selling_price}`} />
+        <meta property="og:type" content="product" />
+        <meta property="og:image" content={main_image} />
+        <meta property="og:locale" content="fa_IR" />
+        <meta property="og:availability" content="in stock" />
+      </Head>
       <Row gutter={5} className="container mx-auto pt-8">
         <Col span={24} sm={18}>
           <Card>
