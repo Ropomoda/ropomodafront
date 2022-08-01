@@ -7,7 +7,7 @@ import Price from '../utils/price';
 import { getProductFullCode } from '../../utils/product';
 import { calculatePriceDiscountPercent } from '../../utils/price';
 
-const Home = ({ wrapperClassName = "", productInfo = {} }) => {
+const Home = ({ wrapperClassName = "", cardClassName = "", productInfo = {} }) => {
     const { code, name, rrp_price, selling_price, collectionInfo = null, main_image = null } = productInfo;
     const { collectionName = null, collectionPrimaryColorHex = null } = collectionInfo || {};
     const discountPercent = calculatePriceDiscountPercent(rrp_price, selling_price);
@@ -22,8 +22,8 @@ const Home = ({ wrapperClassName = "", productInfo = {} }) => {
     return (
         <Link href={`/product/${getProductFullCode(code)}`}>
             <div className={`ml-3 h-full ${wrapperClassName}`}>
-                {wrapRibbonBadge(<Card className='h-full cursor-pointer'>
-                    <div className={`flex flex-col ${styles["product-item-wrapper"]} h-full`}>
+                {wrapRibbonBadge(<Card className={`}h-full cursor-pointer`}>
+                    <div className={`flex flex-col ${styles["product-item-wrapper"]} justify-between h-full ${cardClassName}`}>
                         <ImageLoader
                             src={`/images/loading-image.gif`}
                             className={`${styles["product-image"]} lazyload rounded-lg`}

@@ -5,12 +5,16 @@ import ShopLayout from '../../components/layout/shopLayout';
 
 function Home({ account }) {
     const { token, user, profile } = account;
-    const { name } = profile;
+    const { name } = profile || {};
     return (
         <ShopLayout>
             {token ? <Col>
-                <Row>
-                    <p className='text-xl'>{name}</p>
+                <Row justify='center'>
+                    <div className='text-center'>
+                        <p className='text-xl mt-3'>سلام</p>
+                        <p className='text-xl mt-3'>{name} عزیز؛</p>
+                        <p className='text-xl mt-3'>خوش اومدی</p>
+                    </div>
                 </Row>
             </Col> :
                 <div className='flex flex-col justify-center items-center text-center mt-16'>
@@ -26,7 +30,7 @@ function Home({ account }) {
 
 const mapStateToProps = (state) => {
     return {
-        account: state.account
+        account: state.account || {}
     }
 }
 const mapDispatchToProps = (dispatch) => {

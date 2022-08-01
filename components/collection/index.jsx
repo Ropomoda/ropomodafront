@@ -7,7 +7,7 @@ import ProductItem from '../productItem';
 import WrapperCard from "./wrapperCard";
 import { useEffect, useState } from "react";
 import httpReq from "../../http_requests";
-
+import ProductLoadingSkeleton from '../productItem/productLoadingSkeleton';
 
 const Home = ({
   containerClassName,
@@ -18,6 +18,8 @@ const Home = ({
   badgeText = null
 }) => {
   const [productList, setProductList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -35,12 +37,21 @@ const Home = ({
       paritialVisibilityGutter: 0
     }
   };
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
   const getCollectionData = async () => {
+    setLoading(true);
     try {
       const { data = [] } = await httpReq.storeReq.getAllProducts();
+
+      // a short sleep for loading images
+      await sleep(2000);
       setProductList(data);
     } catch (err) {
       console.log(err);
+    }finally{
+      setLoading(false);
     }
   }
   useEffect(() => {
@@ -58,7 +69,7 @@ const Home = ({
           rtl
         >
           <CarouselHead title={title} type={type} />
-          {productList.map((item, index) => {
+          {loading ? [...Array(10)].map((_, index) => <ProductLoadingSkeleton key={index} />) : productList.map((item, index) => {
             return <ProductItem key={index} type={type} productInfo={
               {
                 ...item,

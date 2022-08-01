@@ -18,16 +18,26 @@ interface productModel {
   rrp_price: Number;
   selling_price: Number;
   max_quantity: Number;
-  main_image?: string;
+  main_image: string;
 }
 function Home({ addItemToCart, deleteCartItem, cartItems }) {
   const router = useRouter();
-  const queryCode: string = router.query?.code;
+  const queryCode: string = router.query?.code as string;
   const code = getProductAbsoluteCode(queryCode);
+  const productDefaults: productModel = {
+    uuid: "",
+    title_fa: "",
+    title_en: "",
+    rrp_price: 0,
+    selling_price: 0,
+    max_quantity: 0,
+    main_image: "",
+  };
+
   const [cartItem, setCartItem] = useState(undefined);
-  const [productDetail, setProductDetail] = useState<productModel>();
-  const { uuid, title_fa, rrp_price, selling_price, max_quantity = null, main_image = null } = productDetail;
-  const discountPrice: Number = rrp_price - selling_price;
+  const [productDetail = productDefaults, setProductDetail] = useState<productModel>();
+  const { uuid, title_fa, rrp_price, selling_price, max_quantity, main_image } = productDetail;
+  const discountPrice: Number = +rrp_price - +selling_price;
   const discountPercent = calculatePriceDiscountPercent(rrp_price, selling_price);
   const checkProductIsInCart = (uuid) => {
     const findProduct = ({ product }) => {
@@ -120,7 +130,7 @@ function Home({ addItemToCart, deleteCartItem, cartItems }) {
                     <i className='fal fa-angle-up text-xl mx-1 text-red-500' />
                   </Button>
                   <Input
-                    max={max_quantity}
+                    max={max_quantity as number}
                     min={1}
                     type="number"
                     size='large'

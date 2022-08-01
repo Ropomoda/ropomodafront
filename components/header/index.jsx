@@ -32,12 +32,12 @@ function Home({ account, logout, cartItems }) {
 
     return (
         <>
-            <div id="header-wrapper" className="bg-white z-20 container mx-auto">
+            <div id="header-wrapper" className="bg-white z-20 mx-3 sm:container mx-auto">
                 <header>
-                    <div className="flex flex-row items-center justify-end sm:justify-between pt-2 sm:pt-3 pb-2">
+                    <div className="flex flex-row items-center justify-end sm:justify-between pt-2 sm:pt-3 pb-2 sm:mt-0 mt-1">
                         <div className="flex-row">
                             {!!token ? <>
-                                <Popover
+                                {!isMobile ? <Popover
                                     content={<div>
                                         <Link href="/user/profile">
                                             <a size="large" className="w-full" type="link">
@@ -75,7 +75,7 @@ function Home({ account, logout, cartItems }) {
                                     <Button className="mr-2" size="large">
                                         <i className="fal fa-user mx-1"></i>
                                     </Button>
-                                </Popover>
+                                </Popover> : null}
                                 <Link href="/user/wishlist">
                                     <Tooltip title="علاقه‌مندی ها" >
                                         <Button className="mr-2" size="large">

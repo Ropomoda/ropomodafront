@@ -28,7 +28,7 @@ function Home({ cartItems }) {
         calculateSumOfItem(cartItems);
     }, [cartItems]);
     return (
-        <Row gutter={20} className="items-center justify-center">
+        <Row gutter={20} className="items-center justify-center mt-3">
             <Col lg={18} span={24} className="mb-3">
                 <Card>
                     {cartItems.length > 0 ? <div>

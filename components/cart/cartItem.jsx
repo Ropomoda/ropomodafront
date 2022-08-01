@@ -16,8 +16,8 @@ function Home({ product, quantity, uuid, deleteCartItem }) {
 
     return (
         <Card>
-            <div className='flex flex-row justify-between'>
-                <div className='flex flex-row'>
+            <div className='flex flex-col sm:flex-row justify-between'>
+                <div className='flex flex-col sm:flex-row items-center'>
                     <Link href={`/product/${getProductFullCode(code)}`}>
                         <ImageLoader
                             src={`/images/loading-image.gif`}
@@ -41,7 +41,7 @@ function Home({ product, quantity, uuid, deleteCartItem }) {
                     <Price wrapperClassName="text-2xl">
                         {selling_price}
                     </Price>
-                    <div className='flex flex-row'>
+                    <div className='flex flex-row mt-3 sm:mt-0'>
                         <Button
                             disabled
                             type='ghost'
