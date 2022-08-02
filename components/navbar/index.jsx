@@ -12,7 +12,7 @@ function Home() {
     return (
         <div id="navbar-wrapper" className="bg-white z-20 hidden sm:block">
             <navbar>
-                <div className="px-3 mt-5">
+                <div className="px-3">
                     <Menu mode="horizontal" >
                         <Menu.SubMenu key="SubMenu" title="دسته بندی ها" icon={<i className="fal fa-bars" />}>
                             <Menu.Item key="blooz">

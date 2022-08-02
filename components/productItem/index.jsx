@@ -8,7 +8,7 @@ import { getProductFullCode } from '../../utils/product';
 import { calculatePriceDiscountPercent } from '../../utils/price';
 
 const Home = ({ wrapperClassName = "", cardClassName = "", productInfo = {} }) => {
-    const { code, name, rrp_price, is_promotion, selling_price, collectionInfo = null, main_image = null } = productInfo;
+    const { code, title_fa, inventory, rrp_price, is_promotion, selling_price, collectionInfo = null, main_image = null } = productInfo;
     const { collectionName = null, collectionPrimaryColorHex = null } = collectionInfo || {};
     const discountPercent = calculatePriceDiscountPercent(rrp_price, selling_price);
 
@@ -31,20 +31,23 @@ const Home = ({ wrapperClassName = "", cardClassName = "", productInfo = {} }) =
                             width={200}
                             height={200}
                         />
-                        <h2 className='mt-3'>{name}</h2>
+                        <h2 className='mt-3 mb-2'>{title_fa}</h2>
+                        {inventory <= 3 ? <p className='mb-4 text-xs text-red-500'>
+                            تنها {inventory} عدد در انبار باقی مانده
+                        </p> : null}
                         {is_promotion ? <div className='w-full flex flex- justify-between items-center'>
                             <span className='ml-1 text-white bg-primary px-2 py-1 rounded-3xl'>
                                 ٪{persianNumber(discountPercent)}
                             </span>
                             <div className='flex flex-col'>
-                                <Price type="through">
-                                    {rrp_price}
-                                </Price>
                                 <Price>
                                     {selling_price}
                                 </Price>
+                                <Price type="through">
+                                    {rrp_price}
+                                </Price>
                             </div>
-                        </div> : <div className='w-full flex flex- justify-between items-center'>
+                        </div> : <div className='w-full flex flex-row justify-end items-center'>
                             <Price>
                                 {selling_price}
                             </Price>

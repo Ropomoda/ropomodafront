@@ -90,10 +90,12 @@ function Home({ cartItems }) {
                             </Price>
                         </div>
 
-                        <Button type='primary' size='large' className='flex flex-row items-center mt-5'>
-                            ادامه خرید
-                            <i className='fal fa-fast-backward mr-2' />
-                        </Button>
+                        <Link href={"/checkout/shipping"}>
+                            <Button type='primary' size='large' className='flex flex-row items-center mt-5'>
+                                ادامه خرید
+                                <i className='fal fa-fast-backward mr-2' />
+                            </Button>
+                        </Link>
                     </div>
                 </Card>
             </Col> : null}

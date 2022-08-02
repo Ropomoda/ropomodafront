@@ -1,4 +1,4 @@
-import { Button, Card, Col, Divider, Image, Input, Row } from 'antd';
+import { Button, Card, Col, Divider, Image, Input, message, Row } from 'antd';
 import ShopLayout from '../../components/layout/shopLayout';
 import Collection from '../../components/collection';
 import { numberWithCommas, persianNumber } from '../../utils/utils';
@@ -43,6 +43,8 @@ function Home({ addItemToCart, deleteCartItem, cartItems }) {
   const { uuid, title_fa, rrp_price, selling_price, max_quantity, main_image, is_promotion } = productDetail;
   const discountPrice: Number = +rrp_price - +selling_price;
   const discountPercent = calculatePriceDiscountPercent(rrp_price, selling_price);
+  const [addToCartLoading, setAddToCartLoading] = useState(false);
+
   const checkProductIsInCart = (uuid) => {
     const findProduct = ({ product }) => {
       const productId = product?.uuid || "";
@@ -59,8 +61,14 @@ function Home({ addItemToCart, deleteCartItem, cartItems }) {
       console.log(err);
     }
   }
-  const addProductToCartHandler = (uuid, quantity = 1) => {
-    addItemToCart(uuid, quantity);
+  const addProductToCartHandler = async (uuid, quantity = 1) => {
+    setAddToCartLoading(true);
+    try {
+      await addItemToCart(uuid, quantity);
+    } catch (error) {
+      message.error("مشکلی پیش آمده");
+    }
+    setAddToCartLoading(false);
   }
   const deleteCartItemHandler = (cartItemId) => {
     deleteCartItem(cartItemId);
@@ -113,15 +121,15 @@ function Home({ addItemToCart, deleteCartItem, cartItems }) {
                   قیمت
                 </span>
                 {is_promotion ? <div>
-                  <div className='flex flex-row item-center mb-2'>
+                  <div className='flex flex-row item-center justify-end mb-2'>
                     <Price type="through">
                       {rrp_price}
                     </Price>
-                    <span className='mr-2 text-white bg-primary px-2 py-1 rounded-3xl'>
+                    <span className='text-sm mr-1 text-white bg-primary px-2 py-1 rounded-3xl'>
                       ٪{persianNumber(discountPercent)}
                     </span>
                   </div>
-                  <span>
+                  <span className='text-xl'>
                     <Price>
                       {selling_price}
                     </Price>
@@ -156,6 +164,7 @@ function Home({ addItemToCart, deleteCartItem, cartItems }) {
                   </Button>
                 </div> :
                   <Button
+                    loading={addToCartLoading}
                     onClick={() => { addProductToCartHandler(uuid) }}
                     type='primary'
                     size='large'

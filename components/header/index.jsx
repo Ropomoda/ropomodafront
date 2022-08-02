@@ -31,8 +31,8 @@ function Home({ account, logout, cartItems }) {
 
 
     return (
-        <>
-            <div id="header-wrapper" className="bg-white z-20 mx-3 sm:container mx-auto">
+        <div className="z-20 bg-white w-full shadow">
+            <div id="header-wrapper" className="mx-3 sm:container mx-auto">
                 <header>
                     <div className="flex flex-row items-center justify-end sm:justify-between pt-2 sm:pt-3 pb-2 sm:mt-0 mt-1">
                         <div className="flex-row">
@@ -120,7 +120,7 @@ function Home({ account, logout, cartItems }) {
                 visible={basketDrawerVisible}
                 onClose={() => { basketDrawerClickHandler(false) }}
             />
-        </>
+        </div>
     )
 }
 const mapStateToProps = (state, ownProps) => ({
