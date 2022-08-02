@@ -8,7 +8,7 @@ import { getProductFullCode } from '../../utils/product';
 import { calculatePriceDiscountPercent } from '../../utils/price';
 
 const Home = ({ wrapperClassName = "", cardClassName = "", productInfo = {} }) => {
-    const { code, name, rrp_price, selling_price, collectionInfo = null, main_image = null } = productInfo;
+    const { code, name, rrp_price, is_promotion, selling_price, collectionInfo = null, main_image = null } = productInfo;
     const { collectionName = null, collectionPrimaryColorHex = null } = collectionInfo || {};
     const discountPercent = calculatePriceDiscountPercent(rrp_price, selling_price);
 
@@ -28,9 +28,11 @@ const Home = ({ wrapperClassName = "", cardClassName = "", productInfo = {} }) =
                             src={`/images/loading-image.gif`}
                             className={`${styles["product-image"]} lazyload rounded-lg`}
                             data-src={main_image}
+                            width={200}
+                            height={200}
                         />
                         <h2 className='mt-3'>{name}</h2>
-                        <div className='w-full flex flex- justify-between items-center'>
+                        {is_promotion ? <div className='w-full flex flex- justify-between items-center'>
                             <span className='ml-1 text-white bg-primary px-2 py-1 rounded-3xl'>
                                 ٪{persianNumber(discountPercent)}
                             </span>
@@ -42,7 +44,11 @@ const Home = ({ wrapperClassName = "", cardClassName = "", productInfo = {} }) =
                                     {selling_price}
                                 </Price>
                             </div>
-                        </div>
+                        </div> : <div className='w-full flex flex- justify-between items-center'>
+                            <Price>
+                                {selling_price}
+                            </Price>
+                        </div>}
                     </div>
                 </Card>, collectionName, collectionPrimaryColorHex)}
             </div >

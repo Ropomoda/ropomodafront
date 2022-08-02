@@ -12,6 +12,7 @@ import { addItemToCart, deleteCartItem } from '../../actions/cartActions';
 import { connect } from "react-redux";
 import * as R from 'ramda';
 import Head from 'next/head';
+import Price from '../../components/utils/price';
 interface productModel {
   uuid: string;
   title_fa: string;
@@ -20,6 +21,7 @@ interface productModel {
   selling_price: Number;
   max_quantity: Number;
   main_image: string;
+  is_promotion: boolean;
 }
 function Home({ addItemToCart, deleteCartItem, cartItems }) {
   const router = useRouter();
@@ -33,11 +35,12 @@ function Home({ addItemToCart, deleteCartItem, cartItems }) {
     selling_price: 0,
     max_quantity: 0,
     main_image: "",
+    is_promotion: false
   };
 
   const [cartItem, setCartItem] = useState(undefined);
   const [productDetail = productDefaults, setProductDetail] = useState<productModel>();
-  const { uuid, title_fa, rrp_price, selling_price, max_quantity, main_image } = productDetail;
+  const { uuid, title_fa, rrp_price, selling_price, max_quantity, main_image, is_promotion } = productDetail;
   const discountPrice: Number = +rrp_price - +selling_price;
   const discountPercent = calculatePriceDiscountPercent(rrp_price, selling_price);
   const checkProductIsInCart = (uuid) => {
@@ -109,32 +112,29 @@ function Home({ addItemToCart, deleteCartItem, cartItems }) {
                 <span>
                   قیمت
                 </span>
-                <span>
-                  {persianNumber(numberWithCommas(rrp_price))}
-                </span>
-              </div>
-              <div className='flex flex-row justify-between mt-3 font-extrabold text-red-500'>
-                <span>
-                  تخفیف
-                  <i className='fal fa-badge-percent mr-2' />
-                </span>
-                <div>
-                  <span className='ml-1'>
-                    (٪{persianNumber(discountPercent)})
-                  </span>
+                {is_promotion ? <div>
+                  <div className='flex flex-row item-center mb-2'>
+                    <Price type="through">
+                      {rrp_price}
+                    </Price>
+                    <span className='mr-2 text-white bg-primary px-2 py-1 rounded-3xl'>
+                      ٪{persianNumber(discountPercent)}
+                    </span>
+                  </div>
                   <span>
-                    {persianNumber(numberWithCommas(discountPrice))}
+                    <Price>
+                      {selling_price}
+                    </Price>
                   </span>
-                </div>
-              </div>
-              <div className='flex flex-row justify-between mt-16 text-lg font-bold'>
-                <span>قابل پرداخت</span>
-                <span>
+                </div> : <div>
                   <span>
-                    {persianNumber(numberWithCommas(selling_price))}
+                    <Price>
+                      {selling_price}
+                    </Price>
                   </span>
-                </span>
+                </div>}
               </div>
+
               <div className='mt-8'>
                 {cartItem ? <div className='flex flex-row justify-center items-center'>
                   <Button disabled type='ghost' size='large' className='ml-1'>

@@ -76,13 +76,6 @@ function Home({ account, logout, cartItems }) {
                                         <i className="fal fa-user mx-1"></i>
                                     </Button>
                                 </Popover> : null}
-                                <Link href="/user/wishlist">
-                                    <Tooltip title="علاقه‌مندی ها" >
-                                        <Button className="mr-2" size="large">
-                                            <i className="fal fa-heart text-black mx-1"></i>
-                                        </Button>
-                                    </Tooltip>
-                                </Link>
                                 <Badge size="small" count={persianNumber(cartItemCount)} offset={[37, 33]} >
                                     <Tooltip title="سبد خرید" >
                                         <Button onClick={() => { basketDrawerClickHandler(true) }} className="mr-2 sm:block hidden" size="large">
