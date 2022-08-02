@@ -27,15 +27,21 @@ function Home() {
                                 مانتو و پانچو
                             </Menu.Item>
                         </Menu.SubMenu>
+
                         <Menu.Item key="mail" icon={<i className="fal fa-badge-percent" />}>
-                            محصولات حراجی!
+                            <Link href="/search">
+                                محصولات حراجی!
+                            </Link>
                         </Menu.Item>
                         <Menu.Item key="two" icon={<i className="fal fa-bullhorn"></i>}>
-                            پرفروش ترین ها
+                            <Link href="/search">
+                                پرفروش ترین ها
+                            </Link>
                         </Menu.Item>
                         <Menu.Item key="trhee" icon={<i className="fal fa-hourglass-end"></i>}>
+                            <Link href="/search">
                                 تک سایز ها
-                                
+                            </Link>
                         </Menu.Item>
                     </Menu>
                 </div>
