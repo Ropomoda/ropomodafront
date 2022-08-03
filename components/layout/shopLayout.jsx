@@ -8,17 +8,18 @@ import Head from 'next/head';
 import { getS3Image } from '../../utils/utils';
 import { BackTop } from 'antd';
 import { connect } from "react-redux";
-import { getProfile, getUserInfo, initAccountInfo, } from '../../actions/accountAction';
+import { getProfile, getUserInfo, getَAddresses, initAccountInfo, } from '../../actions/accountAction';
 import { getCartItems } from '../../actions/cartActions';
 import { setContentLoading } from '../../actions/contentAction';
 
-function Home({ children, getProfile, getUserInfo, getCartItems, account, initAccountInfo, setContentLoading }) {
+function Home({ children, getProfile, getUserInfo, getَAddresses, getCartItems, account, initAccountInfo, setContentLoading }) {
     const { token } = account;
     const init = async () => {
         setContentLoading(true);
         try {
             await initAccountInfo();
             getProfile();
+            getَAddresses();
             getUserInfo();
             getCartItems();
         } catch (error) {
@@ -76,6 +77,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getProfile: () => dispatch(getProfile()),
         getUserInfo: () => dispatch(getUserInfo()),
+        getَAddresses: () => dispatch(getَAddresses()),
         getCartItems: () => dispatch(getCartItems()),
         initAccountInfo: () => dispatch(initAccountInfo()),
         setContentLoading: (status) => dispatch(setContentLoading(status)),

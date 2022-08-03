@@ -25,6 +25,16 @@ export const getProfile = () => {
         customerConfig())
     )
 }
+export const getَAddresses = () => {
+    return makeRequest(() => axios.get(`${BASE_URL}account/address/`,
+        customerConfig())
+    )
+}
+export const addAddresses = ({ json }) => {
+    return makeRequest(() => axios.post(`${BASE_URL}account/address/`, json,
+        customerConfig())
+    )
+}
 export const getUser = () => {
     return makeRequest(() => axios.get(`${BASE_URL}account/`,
         customerConfig())

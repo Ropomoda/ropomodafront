@@ -8,16 +8,17 @@ import Head from 'next/head';
 import { getS3Image } from '../../utils/utils';
 import { BackTop } from 'antd';
 import { connect } from "react-redux";
-import { getProfile, getUserInfo, initAccountInfo, } from '../../actions/accountAction';
+import { getProfile, getUserInfo, getَAddresses, initAccountInfo, } from '../../actions/accountAction';
 import { setContentLoading } from '../../actions/contentAction';
 
-function Home({ children, getProfile, getUserInfo, account, initAccountInfo , setContentLoading  }) {
+function Home({ children, getProfile, getَAddresses, getUserInfo, account, initAccountInfo, setContentLoading }) {
     const { token } = account;
     const init = async () => {
         setContentLoading(true);
         try {
             await initAccountInfo();
             getProfile();
+            getَAddresses();
             getUserInfo();
         } catch (error) {
             console.log(error);
@@ -80,6 +81,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         getProfile: () => dispatch(getProfile()),
+        getَAddresses: () => dispatch(getَAddresses()),
         getUserInfo: () => dispatch(getUserInfo()),
         initAccountInfo: () => dispatch(initAccountInfo()),
         setContentLoading: (status) => dispatch(setContentLoading(status)),

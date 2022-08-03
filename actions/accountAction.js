@@ -1,4 +1,4 @@
-import { ACCOUNT_LOGIN, ACCOUNT_LOGOUT, UPDATE_PROFILE, UPDATE_USER } from "../store/types";
+import { ACCOUNT_LOGIN, ACCOUNT_LOGOUT, ADD_ADDRESS, UPDATE_ADDRESSES, UPDATE_PROFILE, UPDATE_USER } from "../store/types";
 import httpReq from '../http_requests';
 import { message } from "antd";
 
@@ -39,6 +39,34 @@ export const getProfile = () => async (dispatch) => {
   } catch (error) {
     console.log(error);
     message.error("مشکلی در گرفتن اطلاعات پروفایل به وجود آمد.")
+    return Promise.reject(error);
+  }
+};
+export const getَAddresses = () => async (dispatch) => {
+  try {
+    const { data } = await httpReq.accountReq.getَAddresses();
+    dispatch({
+      type: UPDATE_ADDRESSES,
+      payload: [
+        ...data
+      ],
+    });
+    return Promise.resolve();
+  } catch (error) {
+    console.log(error);
+    return Promise.reject(error);
+  }
+};
+export const addAddresses = (addressInfo) => async (dispatch) => {
+  try {
+    const { data } = await httpReq.accountReq.addAddresses({ json: addressInfo });
+    dispatch({
+      type: ADD_ADDRESS,
+      payload: data,
+    });
+    return Promise.resolve();
+  } catch (error) {
+    console.log(error);
     return Promise.reject(error);
   }
 };

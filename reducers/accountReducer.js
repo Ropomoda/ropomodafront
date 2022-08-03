@@ -1,9 +1,10 @@
-import { ACCOUNT_LOGIN, ACCOUNT_LOGOUT, UPDATE_PROFILE, UPDATE_USER } from "../store/types";
+import { ACCOUNT_LOGIN, ACCOUNT_LOGOUT, ADD_ADDRESS, UPDATE_ADDRESSES, UPDATE_PROFILE, UPDATE_USER } from "../store/types";
 
 const initialState = {
   token: null,
   user: {},
   profile: {},
+  addresses: []
 };
 
 const accountReducer = (state = initialState, action) => {
@@ -27,6 +28,19 @@ const accountReducer = (state = initialState, action) => {
           ...state?.user,
           ...action.payload,
         }
+      };
+    case UPDATE_ADDRESSES:
+      return {
+        ...state,
+        addresses: action.payload
+      };
+    case ADD_ADDRESS:
+      return {
+        ...state,
+        addresses: [
+          ...state?.addresses,
+          action.payload,
+        ]
       };
     case ACCOUNT_LOGOUT:
       return initialState;
