@@ -1,32 +1,24 @@
-import { Carousel } from 'antd'
-import React from 'react'
-const contentStyle = {
-    height: '160px',
-    color: '#fff',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#364d79',
-    color: "#000",
-};
-function Home() {
-    return (
-        <>
-            <Carousel>
-                <div>
-                    <h3 style={contentStyle}>1</h3>
-                </div>
-                <div>
-                    <h3 style={contentStyle}>2</h3>
-                </div>
-                <div>
-                    <h3 style={contentStyle}>3</h3>
-                </div>
-                <div>
-                    <h3 style={contentStyle}>4</h3>
-                </div>
-            </Carousel>
-        </>
-    )
-}
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import Image from 'next/image';
+import { getS3Image } from '../../utils/utils';
 
-export default Home
+const bannerAd = ["free delivery.png", "kharid bedone vaseteh.png"];
+const Home = () => {
+    return (
+        <div className='block sm:hidden m-4'>
+            <Swiper
+                spaceBetween={20}
+                slidesPerView={1}
+                className="w-full rounded-3xl"
+                autoplay
+            >
+                {bannerAd.map((item,index)=><SwiperSlide key={index}>
+                    <img src={getS3Image(item)} className='rounded-3xl h-60'/>
+                </SwiperSlide>)}
+            </Swiper>
+        </div>
+    );
+};
+
+export default Home;

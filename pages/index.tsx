@@ -1,5 +1,6 @@
 import ShopLayout from '../components/layout/shopLayout';
 import Collection from '../components/collection';
+import BannerSlider from '../components/bannerSlider';
 import { NextPage } from 'next';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 const Home: NextPage<Props> = () => {
   return (
     <ShopLayout>
+      <BannerSlider />
       <Collection
         title="حراجی!"
         type='special'
